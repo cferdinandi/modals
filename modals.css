@@ -1,0 +1,114 @@
+/*
+
+    NAME.CSS v1.0
+    Description
+    http://gomakethings.com
+
+
+    Licensed under WTFPL.
+    http://www.wtfpl.net/
+    
+
+*/
+
+/*  RESPONSIVE RESET */
+/*  Replace with your own */
+
+@-webkit-viewport { width: device-width; zoom: 1.0; }
+   @-moz-viewport { width: device-width; zoom: 1.0; }
+    @-ms-viewport { width: device-width; zoom: 1.0; }
+     @-o-viewport { width: device-width; zoom: 1.0; }
+        @viewport { width: device-width; zoom: 1.0; }
+
+html { overflow-y: auto; }
+
+img, audio, video, canvas { max-width: 100%; }
+
+/*  Sets Body Width */
+.container { 
+    max-width: 40em;
+    width: 88%;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+
+
+
+
+/*  POP MODALS */
+/*  Modal window styling. */
+
+/*  Hide modal window by default */
+.modal {
+    display: none;
+    visibility: none;
+    z-index: 9999;
+    background-color: #ffffff;
+    border: 1px solid #999;
+    padding: .470588235em .823529412em;
+    border-radius: .235294118em;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+       -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+/*  When active, show modal window */
+.modal.active {
+    display: block;
+    visibility: visible;
+    position: absolute;
+    top: 15%;
+    left: 3%;
+    right: 3%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*  Styling for modal window background */
+.modal-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9998;
+    background-color: #000000;
+    opacity: .85; 
+    filter: alpha(opacity=85);
+}
+
+/*  Styling for close button */
+.close {
+    float: right;
+    color: #808080;
+    font-weight: bold;
+    font-size: 1.529411765em
+    cursor: pointer;
+}
+
+/*  Styling for close button on hover */
+.close:hover {
+    color: #272727;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*  Modal styling for bigger screens */
+@media (min-width: 40em) {
+    .modal.active {
+        left: 8%;
+        right: 8%;
+    }
+
+    /* Set max-width on medium sized modals */
+    .modal-medium.active {
+        max-width: 35em;
+    }
+
+    /* Set max-width on small sized modals */    
+    .modal-small.active {
+        max-width: 25em;
+    }
+}
