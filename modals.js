@@ -23,7 +23,7 @@ $(function () {
     });
 
     // When click outside of modal
-    $('body').on('click','.modal-bg',function() {
+    $('body').on('click touchstart','.modal-bg',function() {
         $('.modal').removeClass('active'); // Hide modal.
         $('.modal-bg').remove(); // Remove modal background.
     });
