@@ -42,7 +42,7 @@ img, audio, video, canvas { max-width: 100%; }
 /*  Hide modal window by default */
 .modal {
     display: none;
-    visibility: none;
+    visibility: hidden;
     z-index: 9999;
     background-color: #ffffff;
     border: 1px solid #999;
