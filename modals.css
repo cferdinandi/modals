@@ -45,12 +45,12 @@ img, audio, video, canvas { max-width: 100%; }
     visibility: hidden;
     z-index: 9999;
     background-color: #ffffff;
-    border: 1px solid #999;
+    border: .071428571em solid #999;
     padding: .470588235em .823529412em;
     border-radius: .235294118em;
-    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-       -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
+       -moz-box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
+            box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
 }
 
 /*  When active, show modal window */
