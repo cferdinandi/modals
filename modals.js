@@ -1,8 +1,8 @@
 /* =============================================================
- * modals.js
- * Simple jQuery modal dialogue pop-up windows.
- * Script by Chris Ferdinandi - http://gomakethings.com
- * Licensed under WTFPL - http://www.wtfpl.net
+    Modals v1.1
+    Simple jQuery modal dialogue pop-up windows.
+    Script by Chris Ferdinandi - http://gomakethings.com
+    Licensed under WTFPL - http://www.wtfpl.net/
  * ============================================================= */
 
 (function($) {

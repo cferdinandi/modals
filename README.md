@@ -5,9 +5,9 @@ Simple modal dialogue windows.
 Getting started with Modals is really easy. [View the online tutorial](http://cferdinandi.github.com/modals/) or dig through the `index.html` file.
 
 ## Changelog
-* 3/27/2013
+* Version 1.1 (March 27, 2013)
   * Touchscreen bug fix.
-* 3/25/2013
+* Version 1.0 (March 25, 2013)
   * Initial release.
 
 ## License

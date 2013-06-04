@@ -1,18 +1,20 @@
-/*
+/* =============================================================
 
-    NAME.CSS v1.0
-    Description
+    Modals v1.1
+    Simple jQuery modal dialogue pop-up windows by Chris Ferdinandi.
     http://gomakethings.com
 
 
     Licensed under WTFPL.
     http://www.wtfpl.net/
     
+ * ============================================================= */
 
-*/
 
-/*  RESPONSIVE RESET */
-/*  Replace with your own */
+/* =============================================================
+    RESPONSIVE RESET
+    Replce with your own.    
+ * ============================================================= */
 
 @-webkit-viewport { width: device-width; zoom: 1.0; }
    @-moz-viewport { width: device-width; zoom: 1.0; }
@@ -36,8 +38,10 @@ img, audio, video, canvas { max-width: 100%; }
 
 
 
-/*  MODALS */
-/*  Modal window styling. */
+/* =============================================================
+    MODALS
+    Modal window styling.
+ * ============================================================= */
 
 /*  Hide modal window by default */
 .modal {
