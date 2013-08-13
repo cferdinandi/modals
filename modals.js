@@ -67,7 +67,7 @@ var showModal = function (toggle) {
 
     // Activate the modal
     addClass(dataTarget, 'active');
-    dataTarget.style.top = toggle.scrollTop + 50 + 'px';
+    dataTarget.style.top = window.pageYOffset + 50 + 'px';
     document.body.appendChild(modalBg);
 
 }
