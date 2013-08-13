@@ -5,6 +5,9 @@ Simple modal dialogue windows.
 Getting started with Modals is really easy. [View the online tutorial](http://cferdinandi.github.com/modals/) or dig through the `index.html` file.
 
 ## Changelog
+* v2.0 (August 12, 2013)
+  * Converted to vanilla JavaScript.
+  * Removed jQuery dependency.
 * v1.1 (June 7, 2013)
   * Switched to MIT license.
 * v1.1 (March 27, 2013)
