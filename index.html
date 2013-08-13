@@ -4,8 +4,16 @@
     <meta charset="utf-8">
     <title>Modals - Simple modal dialogue windows</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <!-- stylesheets -->
     <link rel="stylesheet" href="modals.css" type="text/css">
+
+    <!-- Feature Test -->
+    <script>
+        if ( 'querySelector' in document && 'addEventListener' in window ) {
+            document.documentElement.className += 'js';
+        }
+    </script>
 
     <!-- HTML5 Shim for IE -->
     <!--[if IE]>
@@ -16,7 +24,7 @@
 <body>
 	<section class="container">
 
-	    <h1 style="text-align: center; font-size: 3em;">Pop</h1>
+	    <h1 style="text-align: center; font-size: 3em;">Modals</h1>
 	    <p style="text-align: center; font-size: 1.5em;">Simple modal dialogue windows.</p>
 
         <p><button class="btn modal-toggle" data-target="#modal1">Modal</button> <button class="btn modal-toggle" data-target="#modal2">Modal Medium</button> <button class="btn modal-toggle" data-target="#modal3">Modal Small</button></p>
@@ -46,7 +54,6 @@
 
 
     <!-- Javascript -->
-    <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
     <script type='text/javascript' src='modals.js'></script>
 
 </body>
