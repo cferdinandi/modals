@@ -1,7 +1,7 @@
 /* =============================================================
 
     Modals v2.0
-    Simple jQuery modal dialogue pop-up windows by Chris Ferdinandi.
+    Simple modal dialogue pop-up windows by Chris Ferdinandi.
     http://gomakethings.com
 
     Free to use under the MIT License.
