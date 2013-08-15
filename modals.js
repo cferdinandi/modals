@@ -117,7 +117,7 @@ if ( 'querySelector' in document && 'addEventListener' in window ) {
             e.preventDefault();
 
             // Show the modal
-            showModal(this);
+            showModal(toggle);
          
         }, false);
 
