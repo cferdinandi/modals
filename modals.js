@@ -54,42 +54,41 @@ var toggleClass = function (elem, className) {
     Toggle the modal windows.
  * ============================================================= */
 
-// Function to show modal
-var showModal = function (toggle) {
-
-    // Define the modal
-    var dataID = toggle.getAttribute('data-target');
-    var dataTarget = document.querySelector(dataID);
-
-    // Define the modal background
-    var modalBg = document.createElement('div');
-    addClass(modalBg, 'modal-bg');
-
-    // Activate the modal
-    addClass(dataTarget, 'active');
-    dataTarget.style.top = window.pageYOffset + 50 + 'px';
-    document.body.appendChild(modalBg);
-
-}
-
-// Function to hide all modals
-var hideModals = function (modals, modalsBg) {
-
-    // Hide all modals
-    [].forEach.call(modals, function (modal) {
-        removeClass(modal, 'active');
-    });
-
-    // Hide all modal backgrounds
-    [].forEach.call(modalsBg, function (bg) {
-        document.body.removeChild(bg);
-    });
-
-}
-
-
 // Feature test
-if ( 'querySelector' in document && 'addEventListener' in window ) {
+if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
+
+    // Function to show modal
+    var showModal = function (toggle) {
+
+        // Define the modal
+        var dataID = toggle.getAttribute('data-target');
+        var dataTarget = document.querySelector(dataID);
+
+        // Define the modal background
+        var modalBg = document.createElement('div');
+        addClass(modalBg, 'modal-bg');
+
+        // Activate the modal
+        addClass(dataTarget, 'active');
+        dataTarget.style.top = window.pageYOffset + 50 + 'px';
+        document.body.appendChild(modalBg);
+
+    }
+
+    // Function to hide all modals
+    var hideModals = function (modals, modalsBg) {
+
+        // Hide all modals
+        [].forEach.call(modals, function (modal) {
+            removeClass(modal, 'active');
+        });
+
+        // Hide all modal backgrounds
+        [].forEach.call(modalsBg, function (bg) {
+            document.body.removeChild(bg);
+        });
+
+    }
 
     // Define modals, modal toggle, and modal close
     var modals = document.querySelectorAll('.modal');
