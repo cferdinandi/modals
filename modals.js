@@ -1,6 +1,6 @@
 /* =============================================================
 
-    Modals v2.0
+    Modals v2.1
     Simple modal dialogue pop-up windows by Chris Ferdinandi.
     http://gomakethings.com
 
@@ -90,10 +90,12 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
 
     }
 
+
     // Define modals, modal toggle, and modal close
     var modals = document.querySelectorAll('.modal');
     var modalToggle = document.querySelectorAll('.modal-toggle');
     var modalClose = document.querySelectorAll('.modal-close');
+
 
     // When body is clicked
     document.addEventListener('click', function() {
@@ -103,6 +105,7 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
         
     }, false);
 
+
     // When body is tapped
     document.addEventListener('touchstart', function() {
     
@@ -110,6 +113,7 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
         hideModals(modals, document.querySelectorAll('.modal-bg'));
         
     }, false);
+
 
     // For each modal toggle
     [].forEach.call(modalToggle, function (toggle) {
@@ -129,6 +133,7 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
         }, false);
 
     });
+
 
     // For each modal close
     [].forEach.call(modalClose, function (close) {
