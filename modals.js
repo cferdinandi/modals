@@ -103,6 +103,14 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
         
     }, false);
 
+    // When body is tapped
+    document.addEventListener('touchstart', function() {
+    
+        // Hide all modals
+        hideModals(modals, document.querySelectorAll('.modal-bg'));
+        
+    }, false);
+
     // For each modal toggle
     [].forEach.call(modalToggle, function (toggle) {
 
