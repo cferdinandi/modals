@@ -162,6 +162,15 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
             e.stopPropagation();
 
         }, false);
+
+        // When the menu is tapped
+        modal.addEventListener('touchstart', function(e) {
+
+            // Prevent the "close all dropdowns" function
+            e.stopPropagation();
+
+        }, false);
+        
     });
 
 
