@@ -5,6 +5,9 @@ Simple modal dialogue windows.
 Getting started with Modals is really easy. [View the online tutorial](http://cferdinandi.github.com/modals/) or dig through the `index.html` file.
 
 ## Changelog
+* v2.2 (August 26,2013)
+  * Converted to an IIFE pattern.
+  * Added Buoy vanilla JS micro-library.
 * v2.1 (August 18, 2013)
   * Added touchevent to close modals.
 * v2.0 (August 12, 2013)
