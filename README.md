@@ -7,6 +7,7 @@ Getting started with Modals is really easy. [View the online tutorial](http://cf
 ## Changelog
 * v2.3 (August 27, 2013)
   * Added missing semicolon to variables.
+  * Activated strict mode.
 * v2.2 (August 26,2013)
   * Converted to an IIFE pattern.
   * Added Buoy vanilla JS micro-library.

@@ -11,6 +11,8 @@
 
 (function() {
 
+    'use strict';
+
     // Feature test
     if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
 
