@@ -30,7 +30,7 @@
             dataTarget.style.top = window.pageYOffset + 50 + 'px';
             document.body.appendChild(modalBg);
 
-        }
+        };
 
         // Function to hide all modals
         var hideModals = function (modals, modalsBg) {
@@ -45,7 +45,7 @@
                 document.body.removeChild(bg);
             });
 
-        }
+        };
 
 
         // Define modals, modal toggle, and modal close
