@@ -1,84 +1,84 @@
 /* =============================================================
 
-    Modals v2.3
-    Simple modal dialogue pop-up windows by Chris Ferdinandi.
-    http://gomakethings.com
+	Modals v2.3
+	Simple modal dialogue pop-up windows by Chris Ferdinandi.
+	http://gomakethings.com
 
-    Free to use under the MIT License.
-    http://gomakethings.com/mit/
-    
+	Free to use under the MIT License.
+	http://gomakethings.com/mit/
+
  * ============================================================= */
 
 /*  Hide modal window by default */
 .modal {
-    display: none;
-    visibility: hidden;
-    z-index: 9999;
-    background-color: #ffffff;
-    border: .071428571em solid #999;
-    padding: .470588235em .823529412em;
-    border-radius: .235294118em;
-    -webkit-box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
-       -moz-box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
-            box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
+	display: none;
+	visibility: hidden;
+	z-index: 9999;
+	background-color: #ffffff;
+	border: .071428571em solid #999;
+	padding: .470588235em .823529412em;
+	border-radius: .235294118em;
+	-webkit-box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
+	   -moz-box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
+	        box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
 }
 
 /*  When active, show modal window */
 .modal.active {
-    display: block;
-    visibility: visible;
-    position: absolute;
-    top: 15%;
-    left: 3%;
-    right: 3%;
-    margin-left: auto;
-    margin-right: auto;
+	display: block;
+	visibility: visible;
+	position: absolute;
+	top: 15%;
+	left: 3%;
+	right: 3%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /*  Styling for modal window background */
 .modal-bg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 9998;
-    background-color: #000000;
-    opacity: .85; 
-    filter: alpha(opacity=85);
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 9998;
+	background-color: #000000;
+	opacity: .85;
+	filter: alpha(opacity=85);
 }
 
 /*  Styling for close button */
 .close {
-    float: right;
-    color: #808080;
-    font-weight: bold;
-    font-size: 1.529411765em
-    cursor: pointer;
+	float: right;
+	color: #808080;
+	font-weight: bold;
+	font-size: 1.529411765em
+	cursor: pointer;
 }
 
 /*  Styling for close button on hover */
 .close:hover {
-    color: #272727;
-    text-decoration: none;
-    cursor: pointer;
+	color: #272727;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 
 /*  Modal styling for bigger screens */
 @media (min-width: 40em) {
-    .modal.active {
-        left: 8%;
-        right: 8%;
-    }
+	.modal.active {
+		left: 8%;
+		right: 8%;
+	}
 
-    /* Set max-width on medium sized modals */
-    .modal-medium.active {
-        max-width: 35em;
-    }
+	/* Set max-width on medium sized modals */
+	.modal-medium.active {
+		max-width: 35em;
+	}
 
-    /* Set max-width on small sized modals */    
-    .modal-small.active {
-        max-width: 25em;
-    }
+	/* Set max-width on small sized modals */
+	.modal-small.active {
+		max-width: 25em;
+	}
 }
