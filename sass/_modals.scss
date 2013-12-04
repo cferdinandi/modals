@@ -57,7 +57,7 @@
 
 /*  Styling for close button on hover */
 .close:hover {
-	color: $color-gray-dark;
+	color: darken( $color-gray-dark, 15% );
 	text-decoration: none;
 	cursor: pointer;
 }
