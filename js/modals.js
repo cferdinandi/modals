@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v2.2
+	Modals v2.4
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
