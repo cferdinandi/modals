@@ -5,6 +5,8 @@ Simple modal dialogue windows.
 Getting started with Modals is really easy. [View the online tutorial](http://cferdinandi.github.com/modals/) or dig through the `index.html` file.
 
 ## Changelog
+* v2.4 (December 3, 2013)
+  * Added Sass support.
 * v2.3 (August 27, 2013)
   * Added missing semicolon to variables.
   * Activated strict mode.

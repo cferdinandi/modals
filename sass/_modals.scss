@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v2.3
+	Modals v2.4
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -14,13 +14,11 @@
 	display: none;
 	visibility: hidden;
 	z-index: 9999;
-	background-color: #ffffff;
-	border: .071428571em solid #999;
-	padding: .470588235em .823529412em;
-	border-radius: .235294118em;
-	-webkit-box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
-	   -moz-box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
-	        box-shadow: 0 .235294118em .470588235em rgba(0, 0, 0, 0.3);
+	background-color: $color-white;
+	border: calc-em(1px) solid $color-gray-light;
+	padding: calc-em(8px) calc-em(16px);
+	border-radius: calc-em(1px);
+	@include prefixer(box-shadow, 0 calc-em(4px) calc-em(8px) rgba(0, 0, 0, 0.3), webkit moz spec);
 }
 
 /*  When active, show modal window */
@@ -43,30 +41,30 @@
 	bottom: 0;
 	left: 0;
 	z-index: 9998;
-	background-color: #000000;
-	opacity: .85;
-	filter: alpha(opacity=85);
+	background-color: $color-black;
+	opacity: .9;
+	filter: alpha(opacity=90);
 }
 
 /*  Styling for close button */
 .close {
 	float: right;
-	color: #808080;
+	color: $color-gray-dark;
 	font-weight: bold;
-	font-size: 1.529411765em
+	font-size: calc-em(24px);
 	cursor: pointer;
 }
 
 /*  Styling for close button on hover */
 .close:hover {
-	color: #272727;
+	color: $color-gray-dark;
 	text-decoration: none;
 	cursor: pointer;
 }
 
 
 /*  Modal styling for bigger screens */
-@media (min-width: 40em) {
+@media (min-width: $bp-medium) {
 	.modal.active {
 		left: 8%;
 		right: 8%;
