@@ -1,11 +1,11 @@
 /* =============================================================
 
-    Buoy v1.1
+    Buoy v1.2
     A simple vanilla JS micro-library by Chris Ferdinandi.
     http://gomakethings.com
 
     Class handlers by Todd Motto.
-    http://toddmotto.com/
+    https://github.com/toddmotto/apollo
 
     Module pattern by Keith Rousseau.
     https://twitter.com/keithtri
@@ -15,40 +15,55 @@
 
  * ============================================================= */
 
-window.buoy = (function(){
+window.buoy = (function (window, document, undefined) {
 
     'use strict';
 
+    // Check for classList support
+    var classList = document.documentElement.classList;
+
     // Check if an element has a class
     var hasClass = function (elem, className) {
-        return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+        if ( classList ) {
+            return elem.classList.contains(className);
+        } else {
+            return new RegExp('(^|\\s)' + className + '(\\s|$)').test(elem.className);
+        }
     };
 
     // Add a class to an element
     var addClass = function (elem, className) {
         if ( !hasClass(elem, className) ) {
-            elem.className += ' ' + className;
+            if ( classList ) {
+                elem.classList.add(className);
+            } else {
+                elem.className += (elem.className ? ' ' : '') + className;
+            }
         }
     };
 
     // Remove a class from an element
     var removeClass = function (elem, className) {
-        var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
         if (hasClass(elem, className)) {
-            while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
-                newClass = newClass.replace(' ' + className + ' ', ' ');
+            if ( classList ) {
+                elem.classList.remove(className);
+            } else {
+                elem.className = elem.className.replace(new RegExp('(^|\\s)*' + className + '(\\s|$)*', 'g'), '');
             }
-            elem.className = newClass.replace(/^\s+|\s+$/g, '');
         }
     };
 
     // Toggle a class on an element
     var toggleClass = function (elem, className) {
-        if ( hasClass(elem, className ) ) {
-            removeClass(elem, className);
-        }
-        else {
-            addClass(elem, className);
+        if ( classList ) {
+            elem.classList.toggle(className);
+        } else {
+            if ( hasClass(elem, className ) ) {
+                removeClass(elem, className);
+            }
+            else {
+                addClass(elem, className);
+            }
         }
     };
 
@@ -74,4 +89,4 @@ window.buoy = (function(){
         getSiblings: getSiblings
     };
 
-})();
+})(window, document);
