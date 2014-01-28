@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v2.4
+	Modals v3.0
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -9,23 +9,42 @@
 
  * ============================================================= */
 
-(function (window, document, undefined) {
+window.modals = (function (window, document, undefined) {
 
 	'use strict';
 
 	// Feature test
-	if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
+	if ( 'querySelector' in document && 'addEventListener' in window ) {
 
-		// Function to show modal
-		var showModal = function (toggle) {
+		// SELECTORS
+
+		var modalToggles = document.querySelectorAll('[data-modal]');
+		var modalWindows = document.querySelectorAll('[data-modal-window]');
+		var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+		var i;
+
+
+		// METHODS
+
+		// Show the target modal window
+		var showModal = function (event) {
+
+			// SELECTORS
 
 			// Define the modal
-			var dataID = toggle.getAttribute('data-target');
+			var dataID = this.getAttribute('data-target');
 			var dataTarget = document.querySelector(dataID);
 
 			// Define the modal background
 			var modalBg = document.createElement('div');
+			modalBg.setAttribute('data-modal-bg');
 			buoy.addClass(modalBg, 'modal-bg');
+
+
+			// EVENTS, LISTENERS, AND INITS
+
+			event.stopPropagation(); // Prevent the "close all modals" function
+			event.preventDefault(); // Prevent the default link behavior
 
 			// Activate the modal
 			buoy.addClass(dataTarget, 'active');
@@ -34,11 +53,20 @@
 
 		};
 
-		// Function to hide all modals
-		var hideModals = function (modals, modalsBg) {
+		// Hide all modal windows
+		var hideModals = function (event) {
+
+			// SELECTORS
+
+			var modalsBg = document.querySelectorAll('[data-modal-bg]');
+
+
+			// EVENTS, LISTENERS, AND INITS
+
+			event.preventDefault();
 
 			// Hide all modals
-			[].forEach.call(modals, function (modal) {
+			[].forEach.call(modalWindows, function (modal) {
 				buoy.removeClass(modal, 'active');
 			});
 
@@ -49,102 +77,44 @@
 
 		};
 
-
-		// Define modals, modal toggle, and modal close
-		var modals = document.querySelectorAll('.modal');
-		var modalToggle = document.querySelectorAll('.modal-toggle');
-		var modalClose = document.querySelectorAll('.modal-close');
-
-
-		// When body is clicked
-		document.addEventListener('click', function() {
-
-			// Hide all modals
-			hideModals(modals, document.querySelectorAll('.modal-bg'));
-
-		}, false);
-
-
-		// When body is tapped
-		document.addEventListener('touchstart', function() {
-
-			// Hide all modals
-			hideModals(modals, document.querySelectorAll('.modal-bg'));
-
-		}, false);
-
-
-		// For each modal toggle
-		[].forEach.call(modalToggle, function (toggle) {
-
-			// When the modal toggle is clicked
-			toggle.addEventListener('click', function(e) {
-
-				// Prevent the "close all modals" function
-				e.stopPropagation();
-
-				// Prevent the default link behavior
-				e.preventDefault();
-
-				// Show the modal
-				showModal(toggle);
-
-			}, false);
-
-		});
-
-
-		// For each modal close
-		[].forEach.call(modalClose, function (close) {
-
-			// When the modal toggle is clicked
-			close.addEventListener('click', function(e) {
-
-				// Prevent the default link behavior
-				e.preventDefault();
-
-				// Hide all modals
-				hideModals(modals, document.querySelectorAll('.modal-bg'));
-
-			}, false);
-
-		});
-
-
-		// For each modal window
-		[].forEach.call(modals, function (modal) {
-
-			// When the menu is clicked
-			modal.addEventListener('click', function(e) {
-
-				// Prevent the "close all dropdowns" function
-				e.stopPropagation();
-
-			}, false);
-
-			// When the menu is tapped
-			modal.addEventListener('touchstart', function(e) {
-
-				// Prevent the "close all dropdowns" function
-				e.stopPropagation();
-
-			}, false);
-
-		});
-
-
-		// When key on keyboard is pressed
-		window.addEventListener('keydown', function (e) {
-
-			// If it's the esc key
-			if (e.keyCode == 27) {
-
-				// Hide all modals
-				hideModals(modals, document.querySelectorAll('.modal-bg'));
-
+		// Hide modals on esc key
+		var handleEscKey = function (event) {
+			if (event.keyCode == 27) {
+				hideModals(event);
 			}
+		};
 
-		}, false);
+		// Don't handle modals when clicked inside
+		var handleModalClick = function (event) {
+			event.stopPropagation();
+		};
+
+
+		// EVENTS, LISTENERS, AND INITS
+
+		// When modal toggle is clicked, show modal
+		for (i = modalToggles.length; i--;) {
+			var toggle = modalToggles[i];
+			toggle.addEventListener('click', showModal, false);
+		}
+
+		// When modal close is clicked, hide modals
+		for (i = modalCloseButtons.length; i--;) {
+			var btn = modalCloseButtons[i];
+			btn.addEventListener('click', hideModals, false);
+		}
+
+		//  Hide all modals
+		document.addEventListener('click', hideModals, false); // When body is clicked
+		document.addEventListener('touchstart', hideModals, false); // When body is tapped
+		document.addEventListener('keydown', handleEscKey, false); // When esc key is pressed
+
+		// When modal itself is clicked, don't close it
+		for (i = modalWindows.length; i--;) {
+			var win = modalWindows[i];
+			win.addEventListener('click', handleModalClick, false);
+			win.addEventListener('touchstart', handleModalClick, false);
+		}
 
 	}
 

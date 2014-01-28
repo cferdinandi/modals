@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Modals - Simple modal dialogue windows</title>
+	<title>Modals</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- A basic responsive reset -->
@@ -29,13 +29,6 @@
 	<!-- stylesheets -->
 	<link rel="stylesheet" href="css/modals-css.css" type="text/css">
 
-	<!-- Feature Test -->
-	<script>
-		if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
-			document.documentElement.className += 'js';
-		}
-	</script>
-
 	<!-- HTML5 Shim for IE -->
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -48,27 +41,27 @@
 		<h1 style="text-align: center; font-size: 3em;">Modals</h1>
 		<p style="text-align: center; font-size: 1.5em;">Simple modal dialogue windows.</p>
 
-		<p><button class="btn modal-toggle" data-target="#modal1">Modal</button> <button class="btn modal-toggle" data-target="#modal2">Modal Medium</button> <button class="btn modal-toggle" data-target="#modal3">Modal Small</button></p>
+		<p><button data-modal data-target="#modal1">Modal</button> <button data-modal data-target="#modal2">Modal Medium</button> <button data-modal data-target="#modal3">Modal Small</button></p>
 
-		<div class="modal" id="modal1">
-			<a class="modal-close close">x</a>
+		<div class="modal" data-modal-window id="modal1">
+			<a  class="close" data-modal-close>x</a>
 			<h3>Modal</h3>
 			<p>Modal content</p>
-			<button class="btn modal-close">Close</button>
+			<button data-modal-close>Close</button>
 		</div>
 
-		<div class="modal modal-medium" id="modal2">
-			<a class="modal-close close">x</a>
+		<div class="modal modal-medium" data-modal-window id="modal2">
+			<a  class="close" data-modal-close>x</a>
 			<h3>Modal Medium</h3>
 			<p>Modal content</p>
-			<button class="btn modal-close">Close</button>
+			<button data-modal-close>Close</button>
 		</div>
 
-		<div class="modal modal-small" id="modal3">
-			<a class="modal-close close">x</a>
+		<div class="modal modal-small" data-modal-window id="modal3">
+			<a class="close" data-modal-close>x</a>
 			<h3>Modal Small</h3>
 			<p>Modal content</p>
-			<button class="btn modal-close">Close</button>
+			<button data-modal-close>Close</button>
 		</div>
 
 	</section>

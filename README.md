@@ -5,6 +5,10 @@ Simple modal dialogue windows.
 Getting started with Modals is really easy. [View the online tutorial](http://cferdinandi.github.com/modals/) or dig through the `index.html` file.
 
 ## Changelog
+* v3.0 (January 28, 2014)
+  * Switched to a data attribute for the toggle selector (separates scripts from styles).
+  * Added namespacing to IIFE.
+  * Updated looping method.
 * v2.4 (December 3, 2013)
   * Added Sass support.
 * v2.3 (August 27, 2013)
