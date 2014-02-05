@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v3.0
+	Modals v3.1
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -14,7 +14,7 @@ window.modals = (function (window, document, undefined) {
 	'use strict';
 
 	// Feature test
-	if ( 'querySelector' in document && 'addEventListener' in window ) {
+	if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.foreach ) {
 
 		// SELECTORS
 
@@ -66,12 +66,12 @@ window.modals = (function (window, document, undefined) {
 			event.preventDefault();
 
 			// Hide all modals
-			[].forEach.call(modalWindows, function (modal) {
+			Array.prototype.forEach.call(modalWindows, function (modal, index) {
 				buoy.removeClass(modal, 'active');
 			});
 
 			// Hide all modal backgrounds
-			[].forEach.call(modalsBg, function (bg) {
+			Array.prototype.forEach.call(modalsBg, function (bg, index) {
 				document.body.removeChild(bg);
 			});
 
@@ -93,16 +93,14 @@ window.modals = (function (window, document, undefined) {
 		// EVENTS, LISTENERS, AND INITS
 
 		// When modal toggle is clicked, show modal
-		for (i = modalToggles.length; i--;) {
-			var toggle = modalToggles[i];
+		Array.prototype.forEach.call(modalToggles, function (toggle, index) {
 			toggle.addEventListener('click', showModal, false);
-		}
+		});
 
 		// When modal close is clicked, hide modals
-		for (i = modalCloseButtons.length; i--;) {
-			var btn = modalCloseButtons[i];
+		Array.prototype.forEach.call(modalCloseButtons, function (btn, index) {
 			btn.addEventListener('click', hideModals, false);
-		}
+		});
 
 		//  Hide all modals
 		document.addEventListener('click', hideModals, false); // When body is clicked
@@ -110,11 +108,10 @@ window.modals = (function (window, document, undefined) {
 		document.addEventListener('keydown', handleEscKey, false); // When esc key is pressed
 
 		// When modal itself is clicked, don't close it
-		for (i = modalWindows.length; i--;) {
-			var win = modalWindows[i];
+		Array.prototype.forEach.call(modalWindows, function (win, index) {
 			win.addEventListener('click', handleModalClick, false);
 			win.addEventListener('touchstart', handleModalClick, false);
-		}
+		});
 
 	}
 
