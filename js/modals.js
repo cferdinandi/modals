@@ -14,7 +14,7 @@ window.modals = (function (window, document, undefined) {
 	'use strict';
 
 	// Feature test
-	if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.foreach ) {
+	if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
 
 		// SELECTORS
 
