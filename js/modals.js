@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v3.1
+	Modals v3.2
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -36,7 +36,7 @@ window.modals = (function (window, document, undefined) {
 
 			// Define the modal background
 			var modalBg = document.createElement('div');
-			modalBg.setAttribute('data-modal-bg');
+			modalBg.setAttribute('data-modal-bg', null);
 			buoy.addClass(modalBg, 'modal-bg');
 
 
