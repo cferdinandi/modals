@@ -21,7 +21,6 @@ window.modals = (function (window, document, undefined) {
 		var modalToggles = document.querySelectorAll('[data-modal]');
 		var modalWindows = document.querySelectorAll('[data-modal-window]');
 		var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
-		var i;
 
 
 		// METHODS
