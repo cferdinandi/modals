@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v3.2
+	Modals v3.3
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -62,7 +62,10 @@ window.modals = (function (window, document, undefined) {
 
 			// EVENTS, LISTENERS, AND INITS
 
-			event.preventDefault();
+			// Prevent hide modal link from opening a URL
+			if ( this.tagName == 'A' ) {
+				event.preventDefault();
+			}
 
 			// Hide all modals
 			Array.prototype.forEach.call(modalWindows, function (modal, index) {
