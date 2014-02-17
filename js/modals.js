@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v3.3
+	Modals v3.4
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -52,6 +52,19 @@ window.modals = (function (window, document, undefined) {
 
 		};
 
+		// Stop YouTube, Vimeo, and HTML5 videos from playing when hiding a modal
+		var stopVideo = function (modal) {
+			var iframe = modal.querySelector( 'iframe');
+			var video = modal.querySelector( 'video' );
+			if ( iframe !== null ) {
+				var iframeSrc = iframe.src;
+				iframe.src = iframeSrc;
+			}
+			if ( video !== null ) {
+				video.pause();
+			}
+		};
+
 		// Hide all modal windows
 		var hideModals = function (event) {
 
@@ -75,6 +88,11 @@ window.modals = (function (window, document, undefined) {
 			// Hide all modal backgrounds
 			Array.prototype.forEach.call(modalsBg, function (bg, index) {
 				document.body.removeChild(bg);
+			});
+
+			// Stop any modal videos from playing
+			Array.prototype.forEach.call(modalWindows, function (modal, index) {
+				stopVideo(modal);
 			});
 
 		};
