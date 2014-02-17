@@ -5,6 +5,8 @@ Simple modal dialogue windows.
 Getting started with Modals is really easy. [View the online tutorial](http://cferdinandi.github.com/modals/) or dig through the `index.html` file.
 
 ## Changelog
+* v3.4 (February 16, 2014)
+  * [Added method to stop YouTube, Vimeo, and HTML5 videos from playing when modal is closed.](https://github.com/cferdinandi/modals/issues/5)
 * v3.3 (February 10, 2014)
   * [Fix `event.preventDefault()` bug that was blocking radio button and checkbox behavior.](https://github.com/cferdinandi/modals/issues/6)
 * v3.2 (Feburary 5, 2014)
