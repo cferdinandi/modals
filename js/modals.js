@@ -53,13 +53,13 @@ window.modals = (function (window, document, undefined) {
 
 	// Hide all modal windows
 	// Private method
-	var _hideModals = function (toggle, modalWindows, event) {
+	var _hideModals = function (modalWindows, event) {
 
 		// Get modal background element
 		var modalsBg = document.querySelectorAll('[data-modal-bg]');
 
 		// Prevent hide modal link from opening a URL
-		if ( toggle.tagName == 'A' ) {
+		if ( this !== undefined && this.tagName == 'A' ) {
 			event.preventDefault();
 		}
 
@@ -80,6 +80,13 @@ window.modals = (function (window, document, undefined) {
 
 	};
 
+	// Hide modals when the esc key is pressed
+	var _handleEscKey = function (modalWindows) {
+		if (event.keyCode == 27) {
+			_hideModals(modalWindows, event);
+		}
+	};
+
 	// Don't hide modals when clicking inside one
 	// Private method
 	var _handleModalClick = function (event) {
@@ -98,18 +105,6 @@ window.modals = (function (window, document, undefined) {
 			var modalWindows = document.querySelectorAll('[data-modal-window]');
 			var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
 
-			// Hide modals on click and touch events
-			var _runHideModals = function (event) {
-				_hideModals(this, modalWindows, event);
-			};
-
-			// Hide modals when the esc key is pressed
-			var _handleEscKey = function (event) {
-				if (event.keyCode == 27) {
-					_hideModals(this, modalWindows, event);
-				}
-			};
-
 			// When modal toggle is clicked, show modal
 			Array.prototype.forEach.call(modalToggles, function (toggle, index) {
 				toggle.addEventListener('click', _showModal, false);
@@ -117,13 +112,13 @@ window.modals = (function (window, document, undefined) {
 
 			// When modal close is clicked, hide modals
 			Array.prototype.forEach.call(modalCloseButtons, function (btn, index) {
-				btn.addEventListener('click', _runHideModals, false);
+				btn.addEventListener('click', _hideModals.bind(btn, modalWindows), false);
 			});
 
 			//  Hide all modals
-			document.addEventListener('click', _runHideModals, false); // When body is clicked
-			document.addEventListener('touchstart', _runHideModals, false); // When body is tapped
-			document.addEventListener('keydown', _handleEscKey, false); // When esc key is pressed
+			document.addEventListener('click', _hideModals.bind(this, modalWindows), false); // When body is clicked
+			document.addEventListener('touchstart', _hideModals.bind(this, modalWindows), false); // When body is tapped
+			document.addEventListener('keydown', _handleEscKey.bind(this, modalWindows), false); // When esc key is pressed
 
 			// When modal itself is clicked, don't close it
 			Array.prototype.forEach.call(modalWindows, function (win, index) {
