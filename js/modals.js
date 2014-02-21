@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v3.4
+	Modals v4.0
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -13,126 +13,131 @@ window.modals = (function (window, document, undefined) {
 
 	'use strict';
 
-	// Feature test
-	if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
+	// Show the target modal window
+	// Private method
+	var _showModal = function (event) {
 
-		// SELECTORS
+		// Define the modal
+		var dataID = this.getAttribute('data-target');
+		var dataTarget = document.querySelector(dataID);
 
-		var modalToggles = document.querySelectorAll('[data-modal]');
-		var modalWindows = document.querySelectorAll('[data-modal-window]');
-		var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+		// Define the modal background
+		var modalBg = document.createElement('div');
+		modalBg.setAttribute('data-modal-bg', null);
+		buoy.addClass(modalBg, 'modal-bg');
 
+		// Prevent `hideModals()` and the default link behavior
+		event.stopPropagation();
+		event.preventDefault();
 
-		// METHODS
+		// Activate the modal
+		buoy.addClass(dataTarget, 'active');
+		dataTarget.style.top = window.pageYOffset + 50 + 'px';
+		document.body.appendChild(modalBg);
 
-		// Show the target modal window
-		var showModal = function (event) {
+	};
 
-			// SELECTORS
+	// Stop YouTube, Vimeo, and HTML5 videos from playing when hiding a modal
+	// Private method
+	var _stopVideo = function (modal) {
+		var iframe = modal.querySelector( 'iframe');
+		var video = modal.querySelector( 'video' );
+		if ( iframe !== null ) {
+			var iframeSrc = iframe.src;
+			iframe.src = iframeSrc;
+		}
+		if ( video !== null ) {
+			video.pause();
+		}
+	};
 
-			// Define the modal
-			var dataID = this.getAttribute('data-target');
-			var dataTarget = document.querySelector(dataID);
+	// Hide all modal windows
+	// Private method
+	var _hideModals = function (toggle, modalWindows, event) {
 
-			// Define the modal background
-			var modalBg = document.createElement('div');
-			modalBg.setAttribute('data-modal-bg', null);
-			buoy.addClass(modalBg, 'modal-bg');
+		// Get modal background element
+		var modalsBg = document.querySelectorAll('[data-modal-bg]');
 
+		// Prevent hide modal link from opening a URL
+		if ( toggle.tagName == 'A' ) {
+			event.preventDefault();
+		}
 
-			// EVENTS, LISTENERS, AND INITS
-
-			event.stopPropagation(); // Prevent the "close all modals" function
-			event.preventDefault(); // Prevent the default link behavior
-
-			// Activate the modal
-			buoy.addClass(dataTarget, 'active');
-			dataTarget.style.top = window.pageYOffset + 50 + 'px';
-			document.body.appendChild(modalBg);
-
-		};
-
-		// Stop YouTube, Vimeo, and HTML5 videos from playing when hiding a modal
-		var stopVideo = function (modal) {
-			var iframe = modal.querySelector( 'iframe');
-			var video = modal.querySelector( 'video' );
-			if ( iframe !== null ) {
-				var iframeSrc = iframe.src;
-				iframe.src = iframeSrc;
-			}
-			if ( video !== null ) {
-				video.pause();
-			}
-		};
-
-		// Hide all modal windows
-		var hideModals = function (event) {
-
-			// SELECTORS
-
-			var modalsBg = document.querySelectorAll('[data-modal-bg]');
-
-
-			// EVENTS, LISTENERS, AND INITS
-
-			// Prevent hide modal link from opening a URL
-			if ( this.tagName == 'A' ) {
-				event.preventDefault();
-			}
-
-			// Hide all modals
-			Array.prototype.forEach.call(modalWindows, function (modal, index) {
-				buoy.removeClass(modal, 'active');
-			});
-
-			// Hide all modal backgrounds
-			Array.prototype.forEach.call(modalsBg, function (bg, index) {
-				document.body.removeChild(bg);
-			});
-
-			// Stop any modal videos from playing
-			Array.prototype.forEach.call(modalWindows, function (modal, index) {
-				stopVideo(modal);
-			});
-
-		};
-
-		// Hide modals on esc key
-		var handleEscKey = function (event) {
-			if (event.keyCode == 27) {
-				hideModals(event);
-			}
-		};
-
-		// Don't handle modals when clicked inside
-		var handleModalClick = function (event) {
-			event.stopPropagation();
-		};
-
-
-		// EVENTS, LISTENERS, AND INITS
-
-		// When modal toggle is clicked, show modal
-		Array.prototype.forEach.call(modalToggles, function (toggle, index) {
-			toggle.addEventListener('click', showModal, false);
+		// Hide all modals
+		Array.prototype.forEach.call(modalWindows, function (modal, index) {
+			buoy.removeClass(modal, 'active');
 		});
 
-		// When modal close is clicked, hide modals
-		Array.prototype.forEach.call(modalCloseButtons, function (btn, index) {
-			btn.addEventListener('click', hideModals, false);
+		// Hide all modal backgrounds
+		Array.prototype.forEach.call(modalsBg, function (bg, index) {
+			document.body.removeChild(bg);
 		});
 
-		//  Hide all modals
-		document.addEventListener('click', hideModals, false); // When body is clicked
-		document.addEventListener('touchstart', hideModals, false); // When body is tapped
-		document.addEventListener('keydown', handleEscKey, false); // When esc key is pressed
-
-		// When modal itself is clicked, don't close it
-		Array.prototype.forEach.call(modalWindows, function (win, index) {
-			win.addEventListener('click', handleModalClick, false);
-			win.addEventListener('touchstart', handleModalClick, false);
+		// Stop any modal videos from playing
+		Array.prototype.forEach.call(modalWindows, function (modal, index) {
+			_stopVideo(modal);
 		});
 
-	}
+	};
+
+	// Don't hide modals when clicking inside one
+	// Private method
+	var _handleModalClick = function (event) {
+		event.stopPropagation();
+	};
+
+	// Initialize Modals
+	// Public method
+	var init = function () {
+
+		// Feature test before initializing
+		if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
+
+			// Selectors and variables
+			var modalToggles = document.querySelectorAll('[data-modal]');
+			var modalWindows = document.querySelectorAll('[data-modal-window]');
+			var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+
+			// Hide modals on click and touch events
+			var _runHideModals = function (event) {
+				_hideModals(this, modalWindows, event);
+			};
+
+			// Hide modals when the esc key is pressed
+			var _handleEscKey = function (event) {
+				if (event.keyCode == 27) {
+					_hideModals(this, modalWindows, event);
+				}
+			};
+
+			// When modal toggle is clicked, show modal
+			Array.prototype.forEach.call(modalToggles, function (toggle, index) {
+				toggle.addEventListener('click', _showModal, false);
+			});
+
+			// When modal close is clicked, hide modals
+			Array.prototype.forEach.call(modalCloseButtons, function (btn, index) {
+				btn.addEventListener('click', _runHideModals, false);
+			});
+
+			//  Hide all modals
+			document.addEventListener('click', _runHideModals, false); // When body is clicked
+			document.addEventListener('touchstart', _runHideModals, false); // When body is tapped
+			document.addEventListener('keydown', _handleEscKey, false); // When esc key is pressed
+
+			// When modal itself is clicked, don't close it
+			Array.prototype.forEach.call(modalWindows, function (win, index) {
+				win.addEventListener('click', _handleModalClick, false);
+				win.addEventListener('touchstart', _handleModalClick, false);
+			});
+
+		}
+
+	};
+
+	// Return public methods
+	return {
+		init: init
+	};
 
 })(window, document);
