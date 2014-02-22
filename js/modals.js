@@ -59,7 +59,7 @@ window.modals = (function (window, document, undefined) {
 		var modalsBg = document.querySelectorAll('[data-modal-bg]');
 
 		// Prevent hide modal link from opening a URL
-		if ( this !== undefined && this.tagName == 'A' ) {
+		if ( this !== undefined && this !== null && this.tagName == 'A' ) {
 			event.preventDefault();
 		}
 
@@ -81,7 +81,7 @@ window.modals = (function (window, document, undefined) {
 	};
 
 	// Hide modals when the esc key is pressed
-	var _handleEscKey = function (modalWindows) {
+	var _handleEscKey = function (modalWindows, event) {
 		if (event.keyCode == 27) {
 			_hideModals(modalWindows, event);
 		}
@@ -116,9 +116,9 @@ window.modals = (function (window, document, undefined) {
 			});
 
 			//  Hide all modals
-			document.addEventListener('click', _hideModals.bind(this, modalWindows), false); // When body is clicked
-			document.addEventListener('touchstart', _hideModals.bind(this, modalWindows), false); // When body is tapped
-			document.addEventListener('keydown', _handleEscKey.bind(this, modalWindows), false); // When esc key is pressed
+			document.addEventListener('click', _hideModals.bind(null, modalWindows), false); // When body is clicked
+			document.addEventListener('touchstart', _hideModals.bind(null, modalWindows), false); // When body is tapped
+			document.addEventListener('keydown', _handleEscKey.bind(null, modalWindows), false); // When esc key is pressed
 
 			// When modal itself is clicked, don't close it
 			Array.prototype.forEach.call(modalWindows, function (win, index) {
