@@ -5,9 +5,11 @@ Simple modal dialogue windows.
 Getting started with Modals is really easy. [View the online tutorial](http://cferdinandi.github.com/modals/) or dig through the `index.html` file.
 
 ## Changelog
-* v4.0 (February 21, 2014)
+* v4.0 (February 24, 2014)
   * Better public/private method namespacing.
   * Require `init()` call to run.
+  * New API exposes additional methods for use in your own scripts.
+  * Better documentation.
 * v3.4 (February 16, 2014)
   * [Added method to stop YouTube, Vimeo, and HTML5 videos from playing when modal is closed.](https://github.com/cferdinandi/modals/issues/5)
 * v3.3 (February 10, 2014)

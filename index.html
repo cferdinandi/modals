@@ -41,7 +41,7 @@
 		<h1 style="text-align: center; font-size: 3em;">Modals</h1>
 		<p style="text-align: center; font-size: 1.5em;">Simple modal dialogue windows.</p>
 
-		<p><button data-modal data-target="#modal1">Modal</button> <button data-modal data-target="#modal2">Modal Medium</button> <button data-modal data-target="#modal3">Modal Small</button></p>
+		<p><button data-modal="#modal1">Modal</button> <button data-modal="#modal2">Modal Medium</button> <button data-modal="#modal3">Modal Small</button></p>
 
 		<div class="modal" data-modal-window id="modal1">
 			<a  class="close" data-modal-close>x</a>
@@ -71,7 +71,16 @@
 	<script src="js/buoy.js"></script>
 	<script src="js/modals.js"></script>
 	<script>
-		modals.init();
+		modals.init({
+			modalActiveClass: 'active',
+			modalBGClass: 'modal-bg',
+			initClass: 'js-modals',
+			offset: 50,
+			callbackBeforeOpen: function () {},
+			callbackAfterOpen: function () {},
+			callbackBeforeClose: function () {},
+			callbackAfterClose: function () {}
+		});
 	</script>
 
 </body>
