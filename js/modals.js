@@ -90,37 +90,42 @@ window.modals = (function (window, document, undefined) {
 	// Close all modal windows
 	// Public method
 	// Runs functions
-	var closeModals = function (modalWindows, options, event) {
+	var closeModals = function (options, event) {
 
 		// Selectors and variables
 		options = _mergeObjects( _defaults(), options || {} ); // Merge user options with defaults
+		var openModals = document.querySelectorAll('[data-modal-window].' + options.modalActiveClass);
 		var modalsBg = document.querySelectorAll('[data-modal-bg]'); // Get modal background element
 
-		options.callbackBeforeClose(); // Run callbacks before closing a modal
+		if ( openModals.length !== 0 || modalsBg.length !== 0 ) {
 
-		// Close all modals
-		Array.prototype.forEach.call(modalWindows, function (modal, index) {
-			if ( buoy.hasClass(modal, options.modalActiveClass) ) {
-				_stopVideo(modal); // If active, stop video from playing
-			}
-			buoy.removeClass(modal, options.modalActiveClass);
-		});
+			options.callbackBeforeClose(); // Run callbacks before closing a modal
 
-		// Remove all modal backgrounds
-		Array.prototype.forEach.call(modalsBg, function (bg, index) {
-			document.body.removeChild(bg);
-		});
+			// Close all modals
+			Array.prototype.forEach.call(openModals, function (modal, index) {
+				if ( buoy.hasClass(modal, options.modalActiveClass) ) {
+					_stopVideo(modal); // If active, stop video from playing
+				}
+				buoy.removeClass(modal, options.modalActiveClass);
+			});
 
-		options.callbackAfterClose(); // Run callbacks after closing a modal
+			// Remove all modal backgrounds
+			Array.prototype.forEach.call(modalsBg, function (bg, index) {
+				document.body.removeChild(bg);
+			});
+
+			options.callbackAfterClose(); // Run callbacks after closing a modal
+
+		}
 
 	};
 
 	// Close modals when the esc key is pressed
 	// Private method
 	// Runs functions
-	var _handleEscKey = function (modalWindows, options, event) {
+	var _handleEscKey = function (options, event) {
 		if (event.keyCode == 27) {
-			closeModals(modalWindows, options, event);
+			closeModals(options, event);
 		}
 	};
 
@@ -152,13 +157,13 @@ window.modals = (function (window, document, undefined) {
 
 			// When modal close is clicked, close modal
 			Array.prototype.forEach.call(modalCloseButtons, function (btn, index) {
-				btn.addEventListener('click', closeModals.bind(null, modalWindows, options), false);
+				btn.addEventListener('click', closeModals.bind(null, options), false);
 			});
 
 			// When page outside of modal is clicked, close modal
-			document.addEventListener('click', closeModals.bind(null, modalWindows, options), false); // When body is clicked
-			document.addEventListener('touchstart', closeModals.bind(null, modalWindows, options), false); // When body is tapped
-			document.addEventListener('keydown', _handleEscKey.bind(null, modalWindows, options), false); // When esc key is pressed
+			document.addEventListener('click', closeModals.bind(null, options), false); // When body is clicked
+			document.addEventListener('touchstart', closeModals.bind(null, options), false); // When body is tapped
+			document.addEventListener('keydown', _handleEscKey.bind(null, options), false); // When esc key is pressed
 
 			// When modal itself is clicked, don't close it
 			Array.prototype.forEach.call(modalWindows, function (modal, index) {
