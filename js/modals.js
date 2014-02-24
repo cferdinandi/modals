@@ -20,7 +20,6 @@ window.modals = (function (window, document, undefined) {
 		return {
 			modalActiveClass: 'active',
 			modalBGClass: 'modal-bg',
-			initClass: 'js-modals',
 			offset: 50,
 			callbackBeforeOpen: function () {},
 			callbackAfterOpen: function () {},
