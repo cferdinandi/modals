@@ -96,7 +96,7 @@ window.modals = (function (window, document, undefined) {
 		var openModals = document.querySelectorAll('[data-modal-window].' + options.modalActiveClass);
 		var modalsBg = document.querySelectorAll('[data-modal-bg]'); // Get modal background element
 
-		if ( openModals.length !== 0 || modalsBg.length !== 0 ) {
+		if ( openModals.length > 0 || modalsBg.length > 0 ) {
 
 			options.callbackBeforeClose(); // Run callbacks before closing a modal
 
