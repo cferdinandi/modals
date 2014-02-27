@@ -143,6 +143,8 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 
 ## Changelog
+* v4.1 - February 27, 2014
+	* Converted `_defaults` to a literal object
 * v4.0 - February 24, 2014
 	* Better public/private method namespacing.
 	* Require `init()` call to run.
