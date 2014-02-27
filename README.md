@@ -115,6 +115,18 @@ modals.closeModals(
 );
 ```
 
+**Example 1**
+
+```javascript
+modals.openModal( null, '#modal' );
+```
+
+**Example 2**
+
+```javascript
+modals.closeModals();
+```
+
 
 
 ## Brower Compatability
