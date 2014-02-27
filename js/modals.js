@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v4.0
+	Modals v4.1
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -14,18 +14,15 @@ window.modals = (function (window, document, undefined) {
 	'use strict';
 
 	// Default settings
-	// Private method
-	// Returns an {object}
-	var _defaults = function () {
-		return {
-			modalActiveClass: 'active',
-			modalBGClass: 'modal-bg',
-			offset: 50,
-			callbackBeforeOpen: function () {},
-			callbackAfterOpen: function () {},
-			callbackBeforeClose: function () {},
-			callbackAfterClose: function () {}
-		};
+	// Private {object} variable
+	var _defaults = {
+		modalActiveClass: 'active',
+		modalBGClass: 'modal-bg',
+		offset: 50,
+		callbackBeforeOpen: function () {},
+		callbackAfterOpen: function () {},
+		callbackBeforeClose: function () {},
+		callbackAfterClose: function () {}
 	};
 
 	// Merge default settings with user options
@@ -59,7 +56,7 @@ window.modals = (function (window, document, undefined) {
 	var openModal = function (toggle, modalID, options, event) {
 
 		// Define the modal
-		options = _mergeObjects( _defaults(), options || {} ); // Merge user options with defaults
+		options = _mergeObjects( _defaults, options || {} ); // Merge user options with defaults
 		var modal = document.querySelector(modalID);
 
 		// Define the modal background
@@ -92,7 +89,7 @@ window.modals = (function (window, document, undefined) {
 	var closeModals = function (options, event) {
 
 		// Selectors and variables
-		options = _mergeObjects( _defaults(), options || {} ); // Merge user options with defaults
+		options = _mergeObjects( _defaults, options || {} ); // Merge user options with defaults
 		var openModals = document.querySelectorAll('[data-modal-window].' + options.modalActiveClass);
 		var modalsBg = document.querySelectorAll('[data-modal-bg]'); // Get modal background element
 
@@ -144,7 +141,7 @@ window.modals = (function (window, document, undefined) {
 		if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
 
 			// Selectors and variables
-			options = _mergeObjects( _defaults(), options || {} ); // Merge user options with defaults
+			options = _mergeObjects( _defaults, options || {} ); // Merge user options with defaults
 			var modalToggles = document.querySelectorAll('[data-modal]');
 			var modalWindows = document.querySelectorAll('[data-modal-window]');
 			var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
