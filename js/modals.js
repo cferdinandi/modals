@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v4.1
+	Modals v4.2
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -72,14 +72,14 @@ window.modals = (function (window, document, undefined) {
 			}
 		}
 
-		options.callbackBeforeOpen(); // Run callbacks before opening a modal
+		options.callbackBeforeOpen( toggle, modalID ); // Run callbacks before opening a modal
 
 		// Activate the modal
 		buoy.addClass(modal, options.modalActiveClass);
 		modal.style.top = window.pageYOffset + parseInt(options.offset, 10) + 'px';
 		document.body.appendChild(modalBg);
 
-		options.callbackAfterOpen(); // Run callbacks after opening a modal
+		options.callbackAfterOpen( toggle, modalID ); // Run callbacks after opening a modal
 
 	};
 

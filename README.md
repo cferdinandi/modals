@@ -88,8 +88,8 @@ modals.init({
 	modalActiveClass: 'active', // Class applied to active modal windows
 	modalBGClass: 'modal-bg', // Class applied to the modal background overlay
 	offset: 50, // How far from the top of the viewport to offset modal windows in pixels
-	callbackBeforeOpen: function () {}, // Functions to run before opening a modal
-	callbackAfterOpen: function () {}, // Functions to run after opening a modal
+	callbackBeforeOpen: function ( toggle, modalID ) {}, // Functions to run before opening a modal
+	callbackAfterOpen: function ( toggle, modalID ) {}, // Functions to run after opening a modal
 	callbackBeforeClose: function () {}, // Functions to run before closing a modal
 	callbackAfterClose: function () {} // Functions to run after closing a modal
 });
@@ -143,6 +143,9 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 
 ## Changelog
+
+* v4.2 - March 19, 2014
+	* Passed arguments into callback open functions.
 * v4.1 - February 27, 2014
 	* Converted `_defaults` to a literal object
 * v4.0 - February 24, 2014
