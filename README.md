@@ -32,7 +32,7 @@ Modals also requires [Buoy](http://cferdinandi.github.io/buoy/), a vanilla JS mi
 ### 2. Add the markup to your HTML.
 
 ```html
-<a data-modal data-target="#modal" href="#">Modal Toggle</a>
+<a data-modal="#modal" href="#">Modal Toggle</a>
 
 <div class="modal" data-modal-window id="modal">
 	<a class="close" data-modal-close>x</a>
@@ -59,7 +59,7 @@ Always specify a functioning link as a backup for modals.
 Modals uses modern JavaScript API's that aren't supported by older browsers, including IE 8 and lower. On modern browsers, Modals will prevent the backup URL from redirecting people away from the current page.
 
 ```html
-<a class="modal-toggle" data-target="#modal" href="http://backup-url.com">Modal Toggle</a>
+<a data-modal="#modal" href="http://backup-url.com">Modal Toggle</a>
 ```
 
 *If you need to support older browsers, you can still [download the jQuery version of modals on GitHub](https://github.com/cferdinandi/modals/tree/archive-v1).*
