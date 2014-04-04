@@ -151,6 +151,8 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 ## Changelog
 
+* v5.0 - April 4, 2014
+	* Converted from Buoy class helpers to `classList` with polyfill.
 * v4.2 - March 19, 2014
 	* Passed arguments into callback open functions.
 * v4.1 - February 27, 2014
