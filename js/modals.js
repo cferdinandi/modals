@@ -1,6 +1,6 @@
 /* =============================================================
 
-	Modals v4.2
+	Modals v5.0
 	Simple modal dialogue pop-up windows by Chris Ferdinandi.
 	http://gomakethings.com
 
@@ -62,7 +62,7 @@ window.modals = (function (window, document, undefined) {
 		// Define the modal background
 		var modalBg = document.createElement('div');
 		modalBg.setAttribute('data-modal-bg', null);
-		buoy.addClass(modalBg, options.modalBGClass);
+		modalBg.classList.add( options.modalBGClass );
 
 		// Prevent `closeModals()` and the default link behavior
 		if ( event ) {
@@ -75,7 +75,7 @@ window.modals = (function (window, document, undefined) {
 		options.callbackBeforeOpen( toggle, modalID ); // Run callbacks before opening a modal
 
 		// Activate the modal
-		buoy.addClass(modal, options.modalActiveClass);
+		modal.classList.add( options.modalActiveClass );
 		modal.style.top = window.pageYOffset + parseInt(options.offset, 10) + 'px';
 		document.body.appendChild(modalBg);
 
@@ -99,10 +99,10 @@ window.modals = (function (window, document, undefined) {
 
 			// Close all modals
 			Array.prototype.forEach.call(openModals, function (modal, index) {
-				if ( buoy.hasClass(modal, options.modalActiveClass) ) {
+				if ( modal.classList.contains( options.modalActiveClass ) ) {
 					_stopVideo(modal); // If active, stop video from playing
+					modal.classList.remove( options.modalActiveClass );
 				}
-				buoy.removeClass(modal, options.modalActiveClass);
 			});
 
 			// Remove all modal backgrounds

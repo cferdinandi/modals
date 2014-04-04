@@ -145,12 +145,15 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 
 
 ## License
+
 Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 
 
 ## Changelog
 
+* v5.0 - April 4, 2014
+	* Converted from Buoy class helpers to `classList` with polyfill.
 * v4.2 - March 19, 2014
 	* Passed arguments into callback open functions.
 * v4.1 - February 27, 2014
@@ -196,5 +199,6 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 ## Older Docs
 
+* [Version 4](https://github.com/cferdinandi/modals/tree/archive-v4)
 * [Version 3](http://cferdinandi.github.io/modals/archive/v3/)
 * [Version 1](https://github.com/cferdinandi/modals/tree/archive-v1)
