@@ -1,5 +1,7 @@
 # Modals
-Simple modal dialogue windows. [View the demo](http://cferdinandi.github.io/modals/).
+Simple modal dialogue windows.
+
+[Download Modals 5](https://github.com/cferdinandi/modals/archive/master.zip) / [View the demo](http://cferdinandi.github.io/modals/)
 
 **In This Documentation**
 
