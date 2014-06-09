@@ -197,7 +197,7 @@
 	};
 
 	/**
-	 * Initialize Plugin
+	 * Initialize Modals
 	 * @public
 	 * @param {Object} options User settings
 	 */
