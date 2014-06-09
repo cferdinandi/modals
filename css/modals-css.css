@@ -1,13 +1,13 @@
-/* =============================================================
-
-	Modals v5.0
-	Simple modal dialogue pop-up windows by Chris Ferdinandi.
-	http://gomakethings.com
-
-	Free to use under the MIT License.
-	http://gomakethings.com/mit/
-
- * ============================================================= */
+/**
+ *
+ * Modals v5.1.0
+ * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
+ * http://gomakethings.com
+ *
+ * Free to use under the MIT License.
+ * http://gomakethings.com/mit/
+ *
+ */
 /*  Hide modal window by default */
 .modal {
   display: none;
@@ -18,7 +18,6 @@
   padding: 0.5em 1em;
   border-radius: 0.0725em;
   -webkit-box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
 }
 

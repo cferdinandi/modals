@@ -1,21 +1,35 @@
-/* =============================================================
+/**
+ *
+ * Modals v5.1.0
+ * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
+ * http://gomakethings.com
+ *
+ * Free to use under the MIT License.
+ * http://gomakethings.com/mit/
+ *
+ */
 
-	Modals v5.0
-	Simple modal dialogue pop-up windows by Chris Ferdinandi.
-	http://gomakethings.com
-
-	Free to use under the MIT License.
-	http://gomakethings.com/mit/
-
- * ============================================================= */
-
-window.modals = (function (window, document, undefined) {
+(function (root, factory) {
+	if ( typeof define === 'function' && define.amd ) {
+		define(factory);
+	} else if ( typeof exports === 'object' ) {
+		module.exports = factory;
+	} else {
+		root.modals = factory(root); // @todo Update to plugin name
+	}
+})(this, function (root) {
 
 	'use strict';
 
+	//
+	// Variables
+	//
+
+	var exports = {}; // Object for public APIs
+	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
+
 	// Default settings
-	// Private {object} variable
-	var _defaults = {
+	var defaults = {
 		modalActiveClass: 'active',
 		modalBGClass: 'modal-bg',
 		offset: 50,
@@ -25,157 +39,207 @@ window.modals = (function (window, document, undefined) {
 		callbackAfterClose: function () {}
 	};
 
-	// Merge default settings with user options
-	// Private method
-	// Returns an {object}
-	var _mergeObjects = function ( original, updates ) {
-		for (var key in updates) {
-			original[key] = updates[key];
+
+	//
+	// Methods
+	//
+
+	/**
+	 * Merge defaults with user options
+	 * @private
+	 * @param {Object} defaults Default settings
+	 * @param {Object} options User options
+	 * @returns {Object} Merged values of defaults and options
+	 */
+	var extend = function ( defaults, options ) {
+		for ( var key in options ) {
+			if (Object.prototype.hasOwnProperty.call(options, key)) {
+				defaults[key] = options[key];
+			}
 		}
-		return original;
+		return defaults;
 	};
 
-	// Stop YouTube, Vimeo, and HTML5 videos from playing when hiding a modal
-	// Private method
-	// Runs functions
-	var _stopVideo = function (modal) {
-		var iframe = modal.querySelector( 'iframe');
-		var video = modal.querySelector( 'video' );
-		if ( iframe !== null ) {
-			var iframeSrc = iframe.src;
-			iframe.src = iframeSrc;
-		}
-		if ( video !== null ) {
-			video.pause();
+	/**
+	 * A simple forEach() implementation for Arrays, Objects and NodeLists
+	 * @private
+	 * @param {Array|Object|NodeList} collection Collection of items to iterate
+	 * @param {Function} callback Callback function for each iteration
+	 * @param {Array|Object|NodeList} scope Object/NodeList/Array that forEach is iterating over (aka `this`)
+	 */
+	var forEach = function (collection, callback, scope) {
+		if (Object.prototype.toString.call(collection) === '[object Object]') {
+			for (var prop in collection) {
+				if (Object.prototype.hasOwnProperty.call(collection, prop)) {
+					callback.call(scope, collection[prop], prop, collection);
+				}
+			}
+		} else {
+			for (var i = 0, len = collection.length; i < len; i++) {
+				callback.call(scope, collection[i], i, collection);
+			}
 		}
 	};
 
-	// Open the target modal window
-	// Public method
-	// Runs functions
-	var openModal = function (toggle, modalID, options, event) {
+	/**
+	 * Stop YouTube, Vimeo, and HTML5 videos from playing when leaving the slide
+	 * @private
+	 * @param  {Element} content The content container the video is in
+	 * @param  {String} activeClass The class asigned to expanded content areas
+	 */
+	var stopVideos = function ( content, activeClass ) {
+		if ( !content.classList.contains( activeClass ) ) {
+			var iframe = content.querySelector( 'iframe');
+			var video = content.querySelector( 'video' );
+			if ( iframe ) {
+				var iframeSrc = iframe.src;
+				iframe.src = iframeSrc;
+			}
+			if ( video ) {
+				video.pause();
+			}
+		}
+	};
+
+	/**
+	 * Open the target modal window
+	 * @public
+	 * @param  {Element} toggle The element that toggled the open modal event
+	 * @param  {String} modalID ID of the modal to open
+	 * @param  {Object} options
+	 * @param  {Event} event
+	 */
+	exports.openModal = function (toggle, modalID, options, event) {
 
 		// Define the modal
-		options = _mergeObjects( _defaults, options || {} ); // Merge user options with defaults
+		var settings = extend( defaults, options || {} ); // Merge user options with defaults
 		var modal = document.querySelector(modalID);
 
 		// Define the modal background
 		var modalBg = document.createElement('div');
 		modalBg.setAttribute('data-modal-bg', null);
-		modalBg.classList.add( options.modalBGClass );
+		modalBg.classList.add( settings.modalBGClass );
 
 		// Prevent `closeModals()` and the default link behavior
 		if ( event ) {
 			event.stopPropagation();
-			if ( toggle && toggle.tagName === 'A' ) {
+			if ( toggle && toggle.tagName.toLowerCase() === 'a' ) {
 				event.preventDefault();
 			}
 		}
 
-		options.callbackBeforeOpen( toggle, modalID ); // Run callbacks before opening a modal
+		settings.callbackBeforeOpen( toggle, modalID ); // Run callbacks before opening a modal
 
 		// Activate the modal
-		modal.classList.add( options.modalActiveClass );
-		modal.style.top = window.pageYOffset + parseInt(options.offset, 10) + 'px';
+		modal.classList.add( settings.modalActiveClass );
+		modal.style.top = window.pageYOffset + parseInt(settings.offset, 10) + 'px';
 		document.body.appendChild(modalBg);
 
-		options.callbackAfterOpen( toggle, modalID ); // Run callbacks after opening a modal
+		settings.callbackAfterOpen( toggle, modalID ); // Run callbacks after opening a modal
 
 	};
 
-	// Close all modal windows
-	// Public method
-	// Runs functions
+	/**
+	 * Close all modal windows
+	 * @public
+	 * @param  {Object} options
+	 * @param  {Event} event
+	 */
 	var closeModals = function (options, event) {
 
 		// Selectors and variables
-		options = _mergeObjects( _defaults, options || {} ); // Merge user options with defaults
-		var openModals = document.querySelectorAll('[data-modal-window].' + options.modalActiveClass);
+		var settings = extend( defaults, options || {} ); // Merge user options with defaults
+		var openModals = document.querySelectorAll('[data-modal-window].' + settings.modalActiveClass);
 		var modalsBg = document.querySelectorAll('[data-modal-bg]'); // Get modal background element
 
 		if ( openModals.length > 0 || modalsBg.length > 0 ) {
 
-			options.callbackBeforeClose(); // Run callbacks before closing a modal
+			settings.callbackBeforeClose(); // Run callbacks before closing a modal
 
 			// Close all modals
-			Array.prototype.forEach.call(openModals, function (modal, index) {
-				if ( modal.classList.contains( options.modalActiveClass ) ) {
-					_stopVideo(modal); // If active, stop video from playing
-					modal.classList.remove( options.modalActiveClass );
+			forEach(openModals, function (modal) {
+				if ( modal.classList.contains( settings.modalActiveClass ) ) {
+					stopVideos(modal); // If active, stop video from playing
+					modal.classList.remove( settings.modalActiveClass );
 				}
 			});
 
 			// Remove all modal backgrounds
-			Array.prototype.forEach.call(modalsBg, function (bg, index) {
+			forEach(modalsBg, function (bg) {
 				document.body.removeChild(bg);
 			});
 
-			options.callbackAfterClose(); // Run callbacks after closing a modal
+			settings.callbackAfterClose(); // Run callbacks after closing a modal
 
 		}
 
 	};
 
-	// Close modals when the esc key is pressed
-	// Private method
-	// Runs functions
-	var _handleEscKey = function (options, event) {
-		if (event.keyCode == 27) {
-			closeModals(options, event);
+	/**
+	 * Close modals when the esc key is pressed
+	 * @private
+	 * @param  {Object} options [description]
+	 * @param  {Event} event   [description]
+	 */
+	var handleEscKey = function (settings, event) {
+		if (event.keyCode === 27) {
+			closeModals(settings, event);
 		}
 	};
 
-	// Don't close modals when clicking inside one
-	// Private method
-	// Runs functions
-	var _handleModalClick = function (event) {
+	/**
+	 * Don't close modals when clicking inside one
+	 * @private
+	 * @param  {Event} event
+	 */
+	var handleModalClick = function ( event ) {
 		event.stopPropagation();
 	};
 
-	// Initialize Modals
-	// Public method
-	// Runs functions
-	var init = function ( options ) {
+	/**
+	 * Initialize Plugin
+	 * @public
+	 * @param {Object} options User settings
+	 */
+	exports.init = function ( options ) {
 
-		// Feature test before initializing
-		if ( 'querySelector' in document && 'addEventListener' in window && Array.prototype.forEach ) {
+		// feature test
+		if ( !supports ) return;
 
-			// Selectors and variables
-			options = _mergeObjects( _defaults, options || {} ); // Merge user options with defaults
-			var modalToggles = document.querySelectorAll('[data-modal]');
-			var modalWindows = document.querySelectorAll('[data-modal-window]');
-			var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+		// Selectors and variables
+		var settings = extend( defaults, options || {} ); // Merge user options with defaults
+		var modalToggles = document.querySelectorAll('[data-modal]');
+		var modalWindows = document.querySelectorAll('[data-modal-window]');
+		var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
 
-			// When modal toggle is clicked, open modal
-			Array.prototype.forEach.call(modalToggles, function (toggle, index) {
-				toggle.addEventListener('click', openModal.bind(null, toggle, toggle.getAttribute('data-modal'), options), false);
-			});
+		// When modal toggle is clicked, open modal
+		forEach(modalToggles, function (toggle) {
+			toggle.addEventListener('click', exports.openModal.bind(null, toggle, toggle.getAttribute('data-modal'), settings), false);
+		});
 
-			// When modal close is clicked, close modal
-			Array.prototype.forEach.call(modalCloseButtons, function (btn, index) {
-				btn.addEventListener('click', closeModals.bind(null, options), false);
-			});
+		// When modal close is clicked, close modal
+		forEach(modalCloseButtons, function (btn) {
+			btn.addEventListener('click', closeModals.bind(null, settings), false);
+		});
 
-			// When page outside of modal is clicked, close modal
-			document.addEventListener('click', closeModals.bind(null, options), false); // When body is clicked
-			document.addEventListener('touchstart', closeModals.bind(null, options), false); // When body is tapped
-			document.addEventListener('keydown', _handleEscKey.bind(null, options), false); // When esc key is pressed
+		// When page outside of modal is clicked, close modal
+		document.addEventListener('click', closeModals.bind(null, settings), false); // When body is clicked
+		document.addEventListener('touchstart', closeModals.bind(null, settings), false); // When body is tapped
+		document.addEventListener('keydown', handleEscKey.bind(null, settings), false); // When esc key is pressed
 
-			// When modal itself is clicked, don't close it
-			Array.prototype.forEach.call(modalWindows, function (modal, index) {
-				modal.addEventListener('click', _handleModalClick, false);
-				modal.addEventListener('touchstart', _handleModalClick, false);
-			});
-
-		}
+		// When modal itself is clicked, don't close it
+		forEach(modalWindows, function (modal) {
+			modal.addEventListener('click', handleModalClick, false);
+			modal.addEventListener('touchstart', handleModalClick, false);
+		});
 
 	};
 
-	// Return public methods
-	return {
-		init: init,
-		openModal: openModal,
-		closeModals: closeModals
-	};
 
-})(window, document);
+	//
+	// Public APIs
+	//
+
+	return exports;
+
+});
