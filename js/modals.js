@@ -26,7 +26,7 @@
 	//
 
 	var exports = {}; // Object for public APIs
-	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
+	var supports = !!document.querySelector && !!window.addEventListener; // Feature test
 
 	// Default settings
 	var defaults = {
