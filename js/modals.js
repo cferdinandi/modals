@@ -26,9 +26,9 @@
 	//
 
 	var exports = {}; // Object for public APIs
-    var supports = !!document.querySelector &&
-                   (!!root.addEventListener ||
-                   (typeof window !== 'undefined' && !!window.addEventListener)); // Feature test
+	var supports = !!document.querySelector &&
+				   (!!root.addEventListener ||
+				   (typeof window !== 'undefined' && !!window.addEventListener)); // Feature test
 
 	// Default settings
 	var defaults = {
