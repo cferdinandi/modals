@@ -165,6 +165,8 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 ## Changelog
 
+* v5.1.1 - June 19, 2014
+	* Fixed factory/root/UMD definition.
 * v5.1.0 - June 8, 2014
 	* Added AMD support.
 	* Moved public APIs to exports variable.
