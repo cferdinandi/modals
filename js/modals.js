@@ -1,6 +1,6 @@
 /**
  *
- * Modals v5.1.0
+ * Modals v5.1.1
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://gomakethings.com
  *
@@ -11,11 +11,11 @@
 
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
-		define(factory);
+		define('modals', factory(root));
 	} else if ( typeof exports === 'object' ) {
-		module.exports = factory;
+		module.exports = factory(root);
 	} else {
-		root.modals = factory(root); // @todo Update to plugin name
+		root.modals = factory(root);
 	}
 })(this, function (root) {
 
