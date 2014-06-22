@@ -1,12 +1,10 @@
 /**
- *
- * Modals v5.1.1
+ * Modals v5.2.0
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
- * http://gomakethings.com
- *
+ * http://github.com/cferdinandi/modals
+ * 
  * Free to use under the MIT License.
  * http://gomakethings.com/mit/
- *
  */
 
 (function (root, factory) {
