@@ -1,4 +1,4 @@
-# Modals
+# Modals [![Build Status](https://travis-ci.org/cferdinandi/modals.svg)](https://travis-ci.org/cferdinandi/modals)
 Simple modal dialogue windows.
 
 [Download Modals 5](https://github.com/cferdinandi/modals/archive/master.zip) / [View the demo](http://cferdinandi.github.io/modals/)
@@ -18,12 +18,14 @@ Simple modal dialogue windows.
 
 ## Getting Started
 
+Compiled and production-ready code can be found in the `dist` directory. The `src` directory contains development code. Unit tests are located in the `test` directory.
+
 ### 1. Include Modals on your site.
 
 ```html
-<link rel="stylesheet" href="css/modals-css.css">
-<script src="js/modals.js"></script>
-<script src="buoy.js"></script>
+<link rel="stylesheet" href="dist/css/modals.css">
+<script src="dist/js/classList.js"></script>
+<script src="dist/js/modals.js"></script>
 ```
 
 Modals is [built with Sass](http://sass-lang.com/) for easy customization. If you don't use Sass, that's ok. The `css` folder contains compiled vanilla CSS.
@@ -165,6 +167,11 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 ## Changelog
 
+* v5.2.0 - June 21, 2014
+	* Converted to gulp.js workflow.
+	* Added unit testing.
+	* Updated naming conventions.
+	* Added minified versions of files.
 * v5.1.1 - June 19, 2014
 	* Fixed factory/root/UMD definition.
 * v5.1.0 - June 8, 2014
