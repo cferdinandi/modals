@@ -167,6 +167,8 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 ## Changelog
 
+* v5.2.1 - June 28, 2014
+	* Fixed `extend()` method.
 * v5.2.0 - June 21, 2014
 	* Converted to gulp.js workflow.
 	* Added unit testing.
