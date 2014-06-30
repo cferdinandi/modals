@@ -113,31 +113,37 @@ modals.init({
 
 ### Use Modals events in your own scripts
 
-You can also call Modals events in your own scripts:
+You can also call Modals events in your own scripts.
+
+#### openModal()
+Open a specific modal window.
 
 ```javascript
-// Open a specific modal window
 modals.openModal(
 	toggle, // Node that launches the modal. ex. document.querySelector('#toggle')
 	modalID, // The ID of the modal to launch. ex '#modal'
 	options, // Classes and callbacks. Same options as those passed into the init() function.
 	event // Optional, if a DOM event was triggered.
 );
+```
 
-// Close all modal windows
+**Example**
+
+```javascript
+modals.openModal( null, '#modal' );
+```
+
+#### closeModals()
+Close all modal windows.
+
+```javascript
 modals.closeModals(
 	options, // Classes and callbacks. Same options as those passed into the init() function.
 	event // Optional, if a DOM event was triggered.
 );
 ```
 
-**Example 1**
-
-```javascript
-modals.openModal( null, '#modal' );
-```
-
-**Example 2**
+**Example**
 
 ```javascript
 modals.closeModals();
@@ -145,7 +151,7 @@ modals.closeModals();
 
 
 
-## Brower Compatability
+## Brower Compatibility
 
 Modals works in all modern browsers, and IE 9 and above.
 
@@ -167,6 +173,9 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 ## Changelog
 
+* v5.3.0 - June 30, 2014
+	* Updated unit tests.
+	* Added `destroy()` method.
 * v5.2.1 - June 28, 2014
 	* Fixed `extend()` method.
 * v5.2.0 - June 21, 2014

@@ -1,5 +1,5 @@
 /**
- * Modals v5.2.1
+ * Modals v5.3.0
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
@@ -25,7 +25,12 @@
 
 	var exports = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
-	var settings;
+	var eventListeners = {  //Listener arrays
+		toggles: [],
+		modals: [],
+		buttons: []
+	};
+	var settings, toggles, modals, buttons;
 
 	// Default settings
 	var defaults = {
@@ -198,6 +203,36 @@
 	};
 
 	/**
+	 * Destroy the current initialization.
+	 * @public
+	 */
+	exports.destroy = function () {
+		if ( !settings ) return;
+		if ( toggles ) {
+			forEach( toggles, function ( toggle, index ) {
+				toggle.removeEventListener( 'click', eventListeners.toggles[index], false );
+			});
+			forEach( modals, function ( modal, index ) {
+				modal.removeEventListener( 'click', eventListeners.modals[index], false );
+				modal.removeEventListener( 'touchstart', eventListeners.modals[index], false );
+			});
+			forEach( buttons, function ( btn, index ) {
+				btn.removeEventListener( 'click', eventListeners.buttons[index], false );
+			});
+			document.removeEventListener('click', closeModals, false);
+			document.removeEventListener('touchstart', closeModals, false);
+			document.removeEventListener('keydown', handleEscKey, false);
+			eventListeners.toggles = [];
+			eventListeners.modals = [];
+			eventListeners.buttons = [];
+		}
+		settings = null;
+		toggles = null;
+		modals = null;
+		buttons = null;
+	};
+
+	/**
 	 * Initialize Modals
 	 * @public
 	 * @param {Object} options User settings
@@ -207,20 +242,25 @@
 		// feature test
 		if ( !supports ) return;
 
+		// Destroy any existing initializations
+		exports.destroy();
+
 		// Selectors and variables
 		settings = extend( defaults, options || {} ); // Merge user options with defaults
-		var modalToggles = document.querySelectorAll('[data-modal]');
-		var modalWindows = document.querySelectorAll('[data-modal-window]');
-		var modalCloseButtons = document.querySelectorAll('[data-modal-close]');
+		toggles = document.querySelectorAll('[data-modal]');
+		modals = document.querySelectorAll('[data-modal-window]');
+		buttons = document.querySelectorAll('[data-modal-close]');
 
 		// When modal toggle is clicked, open modal
-		forEach(modalToggles, function (toggle) {
-			toggle.addEventListener('click', exports.openModal.bind(null, toggle, toggle.getAttribute('data-modal'), settings), false);
+		forEach(toggles, function (toggle, index) {
+			eventListeners.toggles[index] = exports.openModal.bind(null, toggle, toggle.getAttribute('data-modal'), settings);
+			toggle.addEventListener('click', eventListeners.toggles[index], false);
 		});
 
 		// When modal close is clicked, close modal
-		forEach(modalCloseButtons, function (btn) {
-			btn.addEventListener('click', closeModals.bind(null, settings), false);
+		forEach(buttons, function (btn, index) {
+			eventListeners.buttons[index] = closeModals.bind(null, settings);
+			btn.addEventListener('click', eventListeners.buttons[index], false);
 		});
 
 		// When page outside of modal is clicked, close modal
@@ -229,9 +269,10 @@
 		document.addEventListener('keydown', handleEscKey.bind(null, settings), false); // When esc key is pressed
 
 		// When modal itself is clicked, don't close it
-		forEach(modalWindows, function (modal) {
-			modal.addEventListener('click', handleModalClick, false);
-			modal.addEventListener('touchstart', handleModalClick, false);
+		forEach(modals, function (modal, index) {
+			eventListeners.modals[index] = handleModalClick;
+			modal.addEventListener('click', eventListeners.modals[index], false);
+			modal.addEventListener('touchstart', eventListeners.modals[index], false);
 		});
 
 	};
