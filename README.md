@@ -1,7 +1,7 @@
 # Modals [![Build Status](https://travis-ci.org/cferdinandi/modals.svg)](https://travis-ci.org/cferdinandi/modals)
 Simple modal dialogue windows.
 
-[Download Modals 5](https://github.com/cferdinandi/modals/archive/master.zip) / [View the demo](http://cferdinandi.github.io/modals/)
+[Download Modals](https://github.com/cferdinandi/modals/archive/master.zip) / [View the demo](http://cferdinandi.github.io/modals/)
 
 **In This Documentation**
 
@@ -25,6 +25,7 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 ```html
 <link rel="stylesheet" href="dist/css/modals.css">
 <script src="dist/js/classList.js"></script>
+<script src="dist/js/bind-polyfill.js"></script>
 <script src="dist/js/modals.js"></script>
 ```
 
@@ -32,7 +33,7 @@ Modals is [built with Sass](http://sass-lang.com/) for easy customization. If yo
 
 The `_config.scss` and `_mixins.scss` files are the same ones used in [Kraken](http://cferdinandi.github.io/kraken/), so you can drop the `_modals.css` file right into Kraken without making any updates. Or, adjust the variables to suit your own project.
 
-Modals also requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends `classList` support back to IE8.
+Modals also requires [classList.js](https://github.com/eligrey/classList.js) and `bind-polyfill.js`, polyfills that extend ECMAScript 5 API support to more browsers.
 
 ### 2. Add the markup to your HTML.
 
@@ -173,6 +174,9 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 ## Changelog
 
+* v5.3.1 - August 8, 2014
+	* Added polyfill for `Functions.prototype.bind`.
+	* Removed Sass paths from `gulpfile.js`.
 * v5.3.0 - June 30, 2014
 	* Updated unit tests.
 	* Added `destroy()` method.
