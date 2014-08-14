@@ -142,12 +142,17 @@
 	 * @param  {Object} options
 	 * @param  {Event} event
 	 */
-	exports.closeModals = function (options, event) {
+	exports.closeModals = function (toggle, options, event) {
 
 		// Selectors and variables
 		var settings = extend( defaults, options || {} ); // Merge user options with defaults
 		var openModals = document.querySelectorAll('[data-modal-window].' + settings.modalActiveClass);
 		var modalsBg = document.querySelectorAll('[data-modal-bg]'); // Get modal background element
+
+		// Prevent default link behavior
+		if ( event && toggle && toggle.tagName.toLowerCase() === 'a' ) {
+			event.preventDefault();
+		}
 
 		if ( openModals.length > 0 || modalsBg.length > 0 ) {
 
@@ -180,7 +185,7 @@
 	 */
 	var handleEscKey = function (settings, event) {
 		if (event.keyCode === 27) {
-			exports.closeModals(settings, event);
+			exports.closeModals(null, settings, event);
 		}
 	};
 
@@ -250,13 +255,13 @@
 
 		// When modal close is clicked, close modal
 		forEach(buttons, function (btn, index) {
-			eventListeners.buttons[index] = exports.closeModals.bind(null, settings);
+			eventListeners.buttons[index] = exports.closeModals.bind(null, btn, settings);
 			btn.addEventListener('click', eventListeners.buttons[index], false);
 		});
 
 		// When page outside of modal is clicked, close modal
-		document.addEventListener('click', exports.closeModals.bind(null, settings), false); // When body is clicked
-		document.addEventListener('touchstart', exports.closeModals.bind(null, settings), false); // When body is tapped
+		document.addEventListener('click', exports.closeModals.bind(null, null, settings), false); // When body is clicked
+		document.addEventListener('touchstart', exports.closeModals.bind(null, null, settings), false); // When body is tapped
 		document.addEventListener('keydown', handleEscKey.bind(null, settings), false); // When esc key is pressed
 
 		// When modal itself is clicked, don't close it
