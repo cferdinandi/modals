@@ -14,7 +14,7 @@
 	// Variables
 	//
 
-	var exports = {}; // Object for public APIs
+	var publicApi = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
 	var eventListeners = {  //Listener arrays
 		toggles: [],
@@ -106,7 +106,7 @@
 	 * @param  {Object} options
 	 * @param  {Event} event
 	 */
-	exports.openModal = function (toggle, modalID, options, event) {
+	publicApi.openModal = function (toggle, modalID, options, event) {
 
 		// Define the modal
 		var settings = extend( settings || defaults, options || {} );  // Merge user options with defaults
@@ -142,7 +142,7 @@
 	 * @param  {Object} options
 	 * @param  {Event} event
 	 */
-	exports.closeModals = function (toggle, options, event) {
+	publicApi.closeModals = function (toggle, options, event) {
 
 		// Selectors and variables
 		var settings = extend( defaults, options || {} ); // Merge user options with defaults
@@ -185,7 +185,7 @@
 	 */
 	var handleEscKey = function (settings, event) {
 		if (event.keyCode === 27) {
-			exports.closeModals(null, settings, event);
+			publicApi.closeModals(null, settings, event);
 		}
 	};
 
@@ -202,7 +202,7 @@
 	 * Destroy the current initialization.
 	 * @public
 	 */
-	exports.destroy = function () {
+	publicApi.destroy = function () {
 		if ( !settings ) return;
 		if ( toggles ) {
 			forEach( toggles, function ( toggle, index ) {
@@ -215,8 +215,8 @@
 			forEach( buttons, function ( btn, index ) {
 				btn.removeEventListener( 'click', eventListeners.buttons[index], false );
 			});
-			document.removeEventListener('click', exports.closeModals, false);
-			document.removeEventListener('touchstart', exports.closeModals, false);
+			document.removeEventListener('click', publicApi.closeModals, false);
+			document.removeEventListener('touchstart', publicApi.closeModals, false);
 			document.removeEventListener('keydown', handleEscKey, false);
 			eventListeners.toggles = [];
 			eventListeners.modals = [];
@@ -233,13 +233,13 @@
 	 * @public
 	 * @param {Object} options User settings
 	 */
-	exports.init = function ( options ) {
+	publicApi.init = function ( options ) {
 
 		// feature test
 		if ( !supports ) return;
 
 		// Destroy any existing initializations
-		exports.destroy();
+		publicApi.destroy();
 
 		// Selectors and variables
 		settings = extend( defaults, options || {} ); // Merge user options with defaults
@@ -249,19 +249,19 @@
 
 		// When modal toggle is clicked, open modal
 		forEach(toggles, function (toggle, index) {
-			eventListeners.toggles[index] = exports.openModal.bind(null, toggle, toggle.getAttribute('data-modal'), settings);
+			eventListeners.toggles[index] = publicApi.openModal.bind(null, toggle, toggle.getAttribute('data-modal'), settings);
 			toggle.addEventListener('click', eventListeners.toggles[index], false);
 		});
 
 		// When modal close is clicked, close modal
 		forEach(buttons, function (btn, index) {
-			eventListeners.buttons[index] = exports.closeModals.bind(null, btn, settings);
+			eventListeners.buttons[index] = publicApi.closeModals.bind(null, btn, settings);
 			btn.addEventListener('click', eventListeners.buttons[index], false);
 		});
 
 		// When page outside of modal is clicked, close modal
-		document.addEventListener('click', exports.closeModals.bind(null, null, settings), false); // When body is clicked
-		document.addEventListener('touchstart', exports.closeModals.bind(null, null, settings), false); // When body is tapped
+		document.addEventListener('click', publicApi.closeModals.bind(null, null, settings), false); // When body is clicked
+		document.addEventListener('touchstart', publicApi.closeModals.bind(null, null, settings), false); // When body is tapped
 		document.addEventListener('keydown', handleEscKey.bind(null, settings), false); // When esc key is pressed
 
 		// When modal itself is clicked, don't close it
@@ -278,6 +278,6 @@
 	// Public APIs
 	//
 
-	return exports;
+	return publicApi;
 
 });
