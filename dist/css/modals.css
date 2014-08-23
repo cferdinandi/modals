@@ -1,5 +1,5 @@
 /**
- * Modals v5.3.2
+ * Modals v5.4.0
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
@@ -12,12 +12,13 @@
   display: none;
   visibility: hidden;
   z-index: 9999;
-  background-color: #ffffff;
+  background-color: white;
   border: 0.0725em solid #e5e5e5;
   padding: 0.5em 1em;
   border-radius: 0.0725em;
   -webkit-box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
+}
 
 /*  When active, show modal window */
 .modal.active {
@@ -28,7 +29,8 @@
   left: 3%;
   right: 3%;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+}
 
 /*  Styling for modal window background */
 .modal-bg {
@@ -39,31 +41,40 @@
   left: 0;
   z-index: 9998;
   background-color: #272727;
-  opacity: 0.9;
-  filter: alpha(opacity=90); }
+  opacity: .9;
+  filter: alpha(opacity=90);
+}
 
 /*  Styling for close button */
 .close {
   float: right;
-  color: #808080;
+  color: gray;
   font-weight: bold;
   font-size: 1.5em;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 /*  Styling for close button on hover */
 .close:hover {
   color: #5a5a5a;
   text-decoration: none;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 /*  Modal styling for bigger screens */
 @media (min-width: 40em) {
-  /* Set max-width on medium sized modals */
-  /* Set max-width on small sized modals */
   .modal.active {
     left: 8%;
-    right: 8%; }
+    right: 8%;
+  }
+
+  /* Set max-width on medium sized modals */
   .modal-medium.active {
-    max-width: 35em; }
+    max-width: 35em;
+  }
+
+  /* Set max-width on small sized modals */
   .modal-small.active {
-    max-width: 25em; } }
+    max-width: 25em;
+  }
+}
