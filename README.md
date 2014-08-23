@@ -176,6 +176,10 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 Modals uses [semantic versioning](http://semver.org/).
 
+* v5.4.0 - August 23, 2014
+	* Switched to Ruby Sass.
+	* Fixed unit test paths.
+	* Switched to event bubbling.
 * v5.3.2 - August 15, 2014
 	* Added fix for UMD structure.
 * v5.3.1 - August 8, 2014
