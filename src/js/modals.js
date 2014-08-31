@@ -196,16 +196,19 @@
 	 */
 	var eventHandler = function (event) {
 		var toggle = event.target;
+		var open = getClosest(toggle, '[data-modal]');
+		var close = getClosest(toggle, '[data-modal-close]');
+		var modal = getClosest(toggle, '[data-modal-window]');
 		var key = event.keyCode;
 
 		if ( key && key === 27) {
 			publicApi.closeModals(null, settings, event);
 		} else if ( toggle ) {
-			if ( getClosest( toggle, '[data-modal-window]' ) && !toggle.hasAttribute('data-modal-close') ) {
+			if ( modal && !close ) {
 				return;
-			} else if ( toggle.hasAttribute( 'data-modal' ) ) {
+			} else if ( open ) {
 				event.preventDefault();
-				publicApi.openModal( toggle, toggle.getAttribute('data-modal'), settings );
+				publicApi.openModal( open, open.getAttribute('data-modal'), settings );
 			} else {
 				event.preventDefault();
 				publicApi.closeModals(toggle, settings, event);

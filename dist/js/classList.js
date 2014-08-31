@@ -1,3 +1,12 @@
+/**
+ * Modals v5.4.1
+ * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
+ * http://github.com/cferdinandi/modals
+ * 
+ * Free to use under the MIT License.
+ * http://gomakethings.com/mit/
+ */
+
 /*
  * classList.js: Cross-browser full element.classList implementation.
  * 2014-01-31
