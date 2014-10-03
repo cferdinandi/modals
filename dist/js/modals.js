@@ -1,5 +1,5 @@
 /**
- * Modals v5.4.1
+ * Modals v5.4.2
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
@@ -15,7 +15,7 @@
 	} else {
 		root.modals = factory(root);
 	}
-})(this, function (root) {
+})(window || this, function (root) {
 
 	'use strict';
 
