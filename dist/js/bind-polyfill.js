@@ -1,5 +1,5 @@
 /**
- * Modals v5.4.1
+ * Modals v5.4.2
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
