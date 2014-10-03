@@ -1,5 +1,5 @@
 /**
- * Modals v5.4.2
+ * Modals v6.0.0
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
@@ -25,13 +25,14 @@
 
 	var publicApi = {}; // Object for public APIs
 	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
+	var state = 'closed';
 	var settings;
 
 	// Default settings
 	var defaults = {
 		modalActiveClass: 'active',
 		modalBGClass: 'modal-bg',
-		offset: 50,
+		backspaceClose: true,
 		callbackBeforeOpen: function () {},
 		callbackAfterOpen: function () {},
 		callbackBeforeClose: function () {},
@@ -141,7 +142,7 @@
 	 * @param  {Object} options
 	 * @param  {Event} event
 	 */
-	publicApi.openModal = function (toggle, modalID, options, event) {
+	publicApi.openModal = function (toggle, modalID, options) {
 
 		// Define the modal
 		var settings = extend( settings || defaults, options || {} );  // Merge user options with defaults
@@ -156,8 +157,8 @@
 
 		// Activate the modal
 		modal.classList.add( settings.modalActiveClass );
-		modal.style.top = window.pageYOffset + parseInt(settings.offset, 10) + 'px';
 		document.body.appendChild(modalBg);
+		state = 'open';
 
 		settings.callbackAfterOpen( toggle, modalID ); // Run callbacks after opening a modal
 
@@ -169,7 +170,7 @@
 	 * @param  {Object} options
 	 * @param  {Event} event
 	 */
-	publicApi.closeModals = function (toggle, options, event) {
+	publicApi.closeModals = function (toggle, options) {
 
 		// Selectors and variables
 		var settings = extend( defaults, options || {} ); // Merge user options with defaults
@@ -193,6 +194,9 @@
 				document.body.removeChild(bg);
 			});
 
+			// Set state to closed
+			state = 'closed';
+
 			settings.callbackAfterClose(); // Run callbacks after closing a modal
 
 		}
@@ -210,17 +214,19 @@
 		var modal = getClosest(toggle, '[data-modal-window]');
 		var key = event.keyCode;
 
-		if ( key && key === 27) {
-			publicApi.closeModals(null, settings, event);
+		if ( key && state === 'open' ) {
+			if ( key === 27 || ( settings.backspaceClose && ( key === 8 || key === 46 ) ) ) {
+				publicApi.closeModals(null, settings);
+			}
 		} else if ( toggle ) {
 			if ( modal && !close ) {
 				return;
 			} else if ( open ) {
 				event.preventDefault();
 				publicApi.openModal( open, open.getAttribute('data-modal'), settings );
-			} else {
+			} else if ( state === 'open' ) {
 				event.preventDefault();
-				publicApi.closeModals(toggle, settings, event);
+				publicApi.closeModals(toggle, settings);
 			}
 		}
 	};

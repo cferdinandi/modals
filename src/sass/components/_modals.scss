@@ -14,12 +14,41 @@
 .modal.active {
 	display: block;
 	visibility: visible;
-	position: absolute;
-	top: 15%;
-	left: 3%;
-	right: 3%;
-	margin-left: auto;
-	margin-right: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	max-height: 100%;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+
+	@media (min-width: $bp-small) {
+		top: 50px;
+		left: 3%;
+		right: 3%;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/*  Modal styling for bigger screens */
+@media (min-width: $bp-medium) {
+	.modal.active {
+		left: 8%;
+		right: 8%;
+	}
+
+	/* Set max-width on medium sized modals */
+	.modal-medium.active {
+		max-width: 35em;
+	}
+
+	/* Set max-width on small sized modals */
+	.modal-small.active {
+		max-width: 25em;
+	}
 }
 
 /*  Styling for modal window background */
@@ -49,23 +78,4 @@
 	color: darken( $color-gray-dark, 15% );
 	text-decoration: none;
 	cursor: pointer;
-}
-
-
-/*  Modal styling for bigger screens */
-@media (min-width: $bp-medium) {
-	.modal.active {
-		left: 8%;
-		right: 8%;
-	}
-
-	/* Set max-width on medium sized modals */
-	.modal-medium.active {
-		max-width: 35em;
-	}
-
-	/* Set max-width on small sized modals */
-	.modal-small.active {
-		max-width: 25em;
-	}
 }

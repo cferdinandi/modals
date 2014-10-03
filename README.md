@@ -87,7 +87,7 @@ In the footer of your page, after the content, initialize Modals. And that's it,
 
 You can install Modals with your favorite package manager.
 
-* **`NPM:** npm install cferdinandi/modals`
+* **NPM:** `npm install cferdinandi/modals`
 * **Bower:** `bower install https://github.com/cferdinandi/modals.git`
 * **Component:** `component install install cferdinandi/modals`
 
@@ -127,13 +127,15 @@ You can pass options and callbacks into Modals through the `init()` function:
 modals.init({
 	modalActiveClass: 'active', // Class applied to active modal windows
 	modalBGClass: 'modal-bg', // Class applied to the modal background overlay
-	offset: 50, // How far from the top of the viewport to offset modal windows in pixels
+	backspaceClose: true, // Boolean, whether or not to enable backspace/delete button modal closing
 	callbackBeforeOpen: function ( toggle, modalID ) {}, // Functions to run before opening a modal
 	callbackAfterOpen: function ( toggle, modalID ) {}, // Functions to run after opening a modal
 	callbackBeforeClose: function () {}, // Functions to run before closing a modal
 	callbackAfterClose: function () {} // Functions to run after closing a modal
 });
 ```
+
+*If your modal includes any form fields, you should set `backspaceClose` to `false` or users will not be able to delete their text.*
 
 ### Use Modals events in your own scripts
 
@@ -206,6 +208,12 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 Modals uses [semantic versioning](http://semver.org/).
 
+* v6.0.0 - October 3, 2014
+	* Modals now full-screen on small screens.
+	* Added overflow-y scrolling for all modals.
+	* Removed `offset` variable from script API.
+	* Added open/closed `state` variable.
+	* Added close modal support for backspace and delete keys.
 * v5.4.2 - October 2, 2014
 	* Fixed CommonJS bug.
 	* Added lazypipe to `gulpfile.js`.
@@ -289,6 +297,7 @@ Modals uses [semantic versioning](http://semver.org/).
 
 ## Older Docs
 
+* [Version 5](https://github.com/cferdinandi/modals/tree/archive-v5)
 * [Version 4](https://github.com/cferdinandi/modals/tree/archive-v4)
 * [Version 3](http://cferdinandi.github.io/modals/archive/v3/)
 * [Version 1](https://github.com/cferdinandi/modals/tree/archive-v1)
