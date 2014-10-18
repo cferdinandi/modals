@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Modals</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- stylesheets -->
+		<link rel="stylesheet" href="dist/css/modals.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+	</head>
+
+	<body>
+
+		<main class="container">
+
+			<nav>
+				<h1>Modals</h1>
+				<p><a href="https://github.com/cferdinandi/modals">GitHub</a></p>
+				<hr>
+			</nav>
+
+			<section>
+	<p><button data-modal="#modal1">Modal</button> <button data-modal="#modal2">Modal Medium</button> <button data-modal="#modal3">Modal Small</button></p>
+
+	<div class="modal" data-modal-window id="modal1">
+		<a  class="close" data-modal-close>x</a>
+		<h3>Modal</h3>
+		<p>Modal content</p>
+		<button data-modal-close>Close</button>
+	</div>
+
+	<div class="modal modal-medium" data-modal-window id="modal2">
+		<a  class="close" data-modal-close>x</a>
+		<h3>Modal Medium</h3>
+		<p>Modal content</p>
+		<button data-modal-close>Close</button>
+	</div>
+
+	<div class="modal modal-small" data-modal-window id="modal3">
+		<a class="close" data-modal-close>x</a>
+		<h3>Modal Small</h3>
+		<p>Modal content</p>
+		<button data-modal-close>Close</button>
+	</div>
+			</section>
+		</main>
+
+		<!-- Javascript -->
+		<script src="dist/js/classList.js"></script>
+		<script src="dist/js/modals.js"></script>
+		<script>
+			modals.init({
+				modalActiveClass: 'active',
+				modalBGClass: 'modal-bg',
+				backspaceClose: true,
+				callbackBeforeOpen: function () {},
+				callbackAfterOpen: function () {},
+				callbackBeforeClose: function () {},
+				callbackAfterClose: function () {}
+			});
+		</script>
+
+
+	</body>
+</html>
