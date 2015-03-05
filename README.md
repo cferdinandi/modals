@@ -162,8 +162,8 @@ Close all modal windows.
 
 ```javascript
 modals.closeModals(
-	options, // Classes and callbacks. Same options as those passed into the init() function.
-	event // Optional, if a DOM event was triggered.
+	toggle, // The node that triggered the close action
+	options // Classes and callbacks. Same options as those passed into the init() function.
 );
 ```
 
