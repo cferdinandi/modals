@@ -1,5 +1,5 @@
 /**
- * Modals v6.0.1
+ * Modals v6.0.2
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
@@ -15,7 +15,7 @@
 	} else {
 		root.modals = factory(root);
 	}
-})(window || this, function (root) {
+})(this, function (root) {
 
 	'use strict';
 
