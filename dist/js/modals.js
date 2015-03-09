@@ -1,5 +1,5 @@
 /**
- * Modals v6.0.1
+ * Modals v6.0.2
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
@@ -9,13 +9,13 @@
 
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
-		define('modals', factory(root));
+		define([], factory);
 	} else if ( typeof exports === 'object' ) {
-		module.exports = factory(root);
+		module.exports = factory;
 	} else {
 		root.modals = factory(root);
 	}
-})(window || this, function (root) {
+})(this, function (window) {
 
 	'use strict';
 
@@ -24,7 +24,7 @@
 	//
 
 	var publicApi = {}; // Object for public APIs
-	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
+	var supports = !!document.querySelector && !!window.addEventListener; // Feature test
 	var state = 'closed';
 	var settings;
 

@@ -206,6 +206,8 @@ Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
 
 Modals uses [semantic versioning](http://semver.org/).
 
+* v6.0.2 - March 7, 2015
+	* Fixed AMD wrapper.
 * v6.0.1 - October 17, 2014
 	* Removed `.bind` dependency and polyfill.
 	* Updated `gulpfile.js` tasks and namespacing.
