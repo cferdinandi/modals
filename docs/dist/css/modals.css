@@ -1,5 +1,5 @@
 /**
- * Modals v6.0.2
+ * Modals v6.0.3
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 

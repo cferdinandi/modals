@@ -1,12 +1,12 @@
 (function (root, factory) {
 	if ( typeof define === 'function' && define.amd ) {
-		define([], factory);
+		define([], factory(root));
 	} else if ( typeof exports === 'object' ) {
-		module.exports = factory;
+		module.exports = factory(root);
 	} else {
 		root.modals = factory(root);
 	}
-})(this, function (window) {
+})(this, function (root) {
 
 	'use strict';
 
@@ -15,7 +15,7 @@
 	//
 
 	var publicApi = {}; // Object for public APIs
-	var supports = !!document.querySelector && !!window.addEventListener; // Feature test
+	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
 	var state = 'closed';
 	var settings;
 
