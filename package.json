@@ -1,6 +1,6 @@
 {
 	"name": "Modals",
-	"version": "6.0.3",
+	"version": "6.0.4",
 	"description": "Simple modal dialogue pop-up windows",
 	"main": "./dist",
 	"author": {
