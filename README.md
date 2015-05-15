@@ -12,8 +12,7 @@ Simple modal dialogue windows.
 5. [Browser Compatibility](#browser-compatibility)
 6. [How to Contribute](#how-to-contribute)
 7. [License](#license)
-8. [Changelog](#changelog)
-9. [Older Docs](#older-docs)
+8. [Older Docs](#older-docs)
 
 
 
@@ -199,106 +198,6 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 ## License
 
 Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
-
-
-
-## Changelog
-
-Modals uses [semantic versioning](http://semver.org/).
-
-* v6.0.4 - May 13, 2015
-	* Fixed Browserify `window` bug.
-* v6.0.3 - March 9, 2015
-	* REALLY fixed UMD wrapper.
-* v6.0.2 - March 7, 2015
-	* Fixed AMD wrapper.
-* v6.0.1 - October 17, 2014
-	* Removed `.bind` dependency and polyfill.
-	* Updated `gulpfile.js` tasks and namespacing.
-* v6.0.0 - October 3, 2014
-	* Modals now full-screen on small screens.
-	* Added overflow-y scrolling for all modals.
-	* Removed `offset` variable from script API.
-	* Added open/closed `state` variable.
-	* Added close modal support for backspace and delete keys.
-* v5.4.2 - October 2, 2014
-	* Fixed CommonJS bug.
-	* Added lazypipe to `gulpfile.js`.
-* v5.4.1 - August 31, 2014
-	* Fixed event listener filter to account for sub elements.
-* v5.4.0 - August 23, 2014
-	* Switched to Ruby Sass.
-	* Fixed unit test paths.
-	* Switched to event bubbling.
-* v5.3.2 - August 15, 2014
-	* Added fix for UMD structure.
-* v5.3.1 - August 8, 2014
-	* Added polyfill for `Functions.prototype.bind`.
-	* Removed Sass paths from `gulpfile.js`.
-* v5.3.0 - June 30, 2014
-	* Updated unit tests.
-	* Added `destroy()` method.
-* v5.2.1 - June 28, 2014
-	* Fixed `extend()` method.
-* v5.2.0 - June 21, 2014
-	* Converted to gulp.js workflow.
-	* Added unit testing.
-	* Updated naming conventions.
-	* Added minified versions of files.
-* v5.1.1 - June 19, 2014
-	* Fixed factory/root/UMD definition.
-* v5.1.0 - June 8, 2014
-	* Added AMD support.
-	* Moved public APIs to exports variable.
-	* Improved feature test.
-	* Replaced `Array.prototype.forEach` hack with proper `forEach` function.
-	* Added a more well supported `trim` function.
-	* General code optimizations for better minification and performance.
-	* Updated to JSDoc documentation.
-	* Updated to three number versioning system.
-	* Added package manager installation info.
-* v5.0 - April 4, 2014
-	* Converted from Buoy class helpers to `classList` with polyfill.
-* v4.2 - March 19, 2014
-	* Passed arguments into callback open functions.
-* v4.1 - February 27, 2014
-	* Converted `_defaults` to a literal object
-* v4.0 - February 24, 2014
-	* Better public/private method namespacing.
-	* Require `init()` call to run.
-	* New API exposes additional methods for use in your own scripts.
-	* Better documentation.
-* v3.4 - February 16, 2014
-	* [Added method to stop YouTube, Vimeo, and HTML5 videos from playing when modal is closed.](https://github.com/cferdinandi/modals/issues/5)
-* v3.3 - February 10, 2014
-	* [Fix `event.preventDefault()` bug that was blocking radio button and checkbox behavior.](https://github.com/cferdinandi/modals/issues/6)
-* v3.2 - Feburary 5, 2014
-	* [Fixed `setAttribute` bug in FireFox.](https://github.com/cferdinandi/kraken/issues/34)
-* v3.1 - February 4, 2014
-	* Reverted to `Array.prototype.foreach` loops.
-* v3.0 - January 28, 2014
-	* Switched to a data attribute for the toggle selector (separates scripts from styles).
-	* Added namespacing to IIFE.
-	* Updated looping method.
-* v2.4 - December 3, 2013
-	* Added Sass support.
-* v2.3 - August 27, 2013
-	* Added missing semicolon to variables.
-	* Activated strict mode.
-* v2.2 - August 26,2013
-	* Converted to an IIFE pattern.
-	* Added Buoy vanilla JS micro-library.
-* v2.1 - August 18, 2013
-	* Added touchevent to close modals.
-* v2.0 - August 12, 2013
-	* Converted to vanilla JavaScript.
-	* Removed jQuery dependency.
-* v1.1 - June 7, 2013
-	* Switched to MIT license.
-* v1.1 - March 27, 2013
-	* Touchscreen bug fix.
-* v1.0 - March 25, 2013
-	* Initial release.
 
 
 
