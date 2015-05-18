@@ -12,7 +12,6 @@ Simple modal dialogue windows.
 5. [Browser Compatibility](#browser-compatibility)
 6. [How to Contribute](#how-to-contribute)
 7. [License](#license)
-8. [Older Docs](#older-docs)
 
 
 
@@ -197,13 +196,4 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 
 ## License
 
-Modals is licensed under the [MIT License](http://gomakethings.com/mit/).
-
-
-
-## Older Docs
-
-* [Version 5](https://github.com/cferdinandi/modals/tree/archive-v5)
-* [Version 4](https://github.com/cferdinandi/modals/tree/archive-v4)
-* [Version 3](http://cferdinandi.github.io/modals/archive/v3/)
-* [Version 1](https://github.com/cferdinandi/modals/tree/archive-v1)
+The code is available under the [MIT License](LICENSE.md).
