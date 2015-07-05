@@ -24,86 +24,14 @@
 		modalActiveClass: 'active',
 		modalBGClass: 'modal-bg',
 		backspaceClose: true,
-		callbackBeforeOpen: function () {},
-		callbackAfterOpen: function () {},
-		callbackBeforeClose: function () {},
-		callbackAfterClose: function () {}
+		callbackOpen: function () {},
+		callbackClose: function () {}
 	};
 
 
 	//
 	// Methods
 	//
-
-	/**
-	 * A simple forEach() implementation for Arrays, Objects and NodeLists
-	 * @private
-	 * @param {Array|Object|NodeList} collection Collection of items to iterate
-	 * @param {Function} callback Callback function for each iteration
-	 * @param {Array|Object|NodeList} scope Object/NodeList/Array that forEach is iterating over (aka `this`)
-	 */
-	var forEach = function (collection, callback, scope) {
-		if (Object.prototype.toString.call(collection) === '[object Object]') {
-			for (var prop in collection) {
-				if (Object.prototype.hasOwnProperty.call(collection, prop)) {
-					callback.call(scope, collection[prop], prop, collection);
-				}
-			}
-		} else {
-			for (var i = 0, len = collection.length; i < len; i++) {
-				callback.call(scope, collection[i], i, collection);
-			}
-		}
-	};
-
-	/**
-	 * Merge defaults with user options
-	 * @private
-	 * @param {Object} defaults Default settings
-	 * @param {Object} options User options
-	 * @returns {Object} Merged values of defaults and options
-	 */
-	var extend = function ( defaults, options ) {
-		var extended = {};
-		forEach(defaults, function (value, prop) {
-			extended[prop] = defaults[prop];
-		});
-		forEach(options, function (value, prop) {
-			extended[prop] = options[prop];
-		});
-		return extended;
-	};
-
-	/**
-	 * Get the closest element up the DOM with the matching selector
-	 * @param  {Element} elem The starting element
-	 * @param  {String} selector The CSS selector to check for
-	 * @return {Boolean|Element} Returns false is no matching element is found
-	 */
-	var getClosest = function (elem, selector) {
-
-		var firstChar = selector.charAt(0);
-
-		// Get closest match
-		for ( ; elem && elem !== document; elem = elem.parentNode ) {
-			if ( firstChar === '.' ) {
-				if ( elem.classList.contains( selector.substr(1) ) ) {
-					return elem;
-				}
-			} else if ( firstChar === '#' ) {
-				if ( elem.id === selector.substr(1) ) {
-					return elem;
-				}
-			} else if ( firstChar === '[' ) {
-				if ( elem.hasAttribute( selector.substr(1, selector.length - 2) ) ) {
-					return elem;
-				}
-			}
-		}
-
-		return false;
-
-	};
 
 	/**
 	 * Stop YouTube, Vimeo, and HTML5 videos from playing when leaving the slide
@@ -136,7 +64,7 @@
 	publicApi.openModal = function (toggle, modalID, options) {
 
 		// Define the modal
-		var settings = extend( settings || defaults, options || {} );  // Merge user options with defaults
+		var settings = buoy.extend( settings || defaults, options || {} );  // Merge user options with defaults
 		var modal = document.querySelector(modalID);
 
 		// Define the modal background
@@ -144,14 +72,12 @@
 		modalBg.setAttribute('data-modal-bg', null);
 		modalBg.classList.add( settings.modalBGClass );
 
-		settings.callbackBeforeOpen( toggle, modalID ); // Run callbacks before opening a modal
-
 		// Activate the modal
 		modal.classList.add( settings.modalActiveClass );
 		document.body.appendChild(modalBg);
 		state = 'open';
 
-		settings.callbackAfterOpen( toggle, modalID ); // Run callbacks after opening a modal
+		settings.callbackOpen( toggle, modalID ); // Run callbacks after opening a modal
 
 	};
 
@@ -164,16 +90,14 @@
 	publicApi.closeModals = function (toggle, options) {
 
 		// Selectors and variables
-		var settings = extend( defaults, options || {} ); // Merge user options with defaults
+		var settings = buoy.extend( defaults, options || {} ); // Merge user options with defaults
 		var openModals = document.querySelectorAll('[data-modal-window].' + settings.modalActiveClass);
 		var modalsBg = document.querySelectorAll('[data-modal-bg]'); // Get modal background element
 
 		if ( openModals.length > 0 || modalsBg.length > 0 ) {
 
-			settings.callbackBeforeClose(); // Run callbacks before closing a modal
-
 			// Close all modals
-			forEach(openModals, function (modal) {
+			buoy.forEach(openModals, function (modal) {
 				if ( modal.classList.contains( settings.modalActiveClass ) ) {
 					stopVideos(modal); // If active, stop video from playing
 					modal.classList.remove( settings.modalActiveClass );
@@ -181,14 +105,14 @@
 			});
 
 			// Remove all modal backgrounds
-			forEach(modalsBg, function (bg) {
+			buoy.forEach(modalsBg, function (bg) {
 				document.body.removeChild(bg);
 			});
 
 			// Set state to closed
 			state = 'closed';
 
-			settings.callbackAfterClose(); // Run callbacks after closing a modal
+			settings.callbackClose(); // Run callbacks after closing a modal
 
 		}
 
@@ -200,9 +124,9 @@
 	 */
 	var eventHandler = function (event) {
 		var toggle = event.target;
-		var open = getClosest(toggle, '[data-modal]');
-		var close = getClosest(toggle, '[data-modal-close]');
-		var modal = getClosest(toggle, '[data-modal-window]');
+		var open = buoy.getClosest(toggle, '[data-modal]');
+		var close = buoy.getClosest(toggle, '[data-modal-close]');
+		var modal = buoy.getClosest(toggle, '[data-modal-window]');
 		var key = event.keyCode;
 
 		if ( key && state === 'open' ) {
@@ -248,7 +172,7 @@
 		publicApi.destroy();
 
 		// Merge user options with defaults
-		settings = extend( defaults, options || {} );
+		settings = buoy.extend( defaults, options || {} );
 
 		// Listen for events
 		document.addEventListener('click', eventHandler, false);

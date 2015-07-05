@@ -24,14 +24,11 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 ```html
 <link rel="stylesheet" href="dist/css/modals.css">
 <script src="dist/js/classList.js"></script>
+<script src="dist/js/buoy.js"></script>
 <script src="dist/js/modals.js"></script>
 ```
 
-Modals is [built with Sass](http://sass-lang.com/) for easy customization. If you don't use Sass, that's ok. The `css` folder contains compiled vanilla CSS.
-
-The `_config.scss` and `_mixins.scss` files are the same ones used in [Kraken](http://cferdinandi.github.io/kraken/), so you can drop the `_modals.css` file right into Kraken without making any updates. Or, adjust the variables to suit your own project.
-
-Modals also requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends ECMAScript 5 API support to more browsers.
+Modals requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends ECMAScript 5 API support to more browsers. It also requires [Buoy](https://github.com/cferdinandi/buoy), a lightweight collection of helper methods for getting stuff done with native JavaScript.
 
 ### 2. Add the markup to your HTML.
 
@@ -98,7 +95,6 @@ If you would prefer, you can work with the development code in the `src` directo
 Make sure these are installed first.
 
 * [Node.js](http://nodejs.org)
-* [Ruby Sass](http://sass-lang.com/install)
 * [Gulp](http://gulpjs.com) `sudo npm install -g gulp`
 
 ### Quick Start
@@ -124,10 +120,8 @@ modals.init({
 	modalActiveClass: 'active', // Class applied to active modal windows
 	modalBGClass: 'modal-bg', // Class applied to the modal background overlay
 	backspaceClose: true, // Boolean, whether or not to enable backspace/delete button modal closing
-	callbackBeforeOpen: function ( toggle, modalID ) {}, // Functions to run before opening a modal
-	callbackAfterOpen: function ( toggle, modalID ) {}, // Functions to run after opening a modal
-	callbackBeforeClose: function () {}, // Functions to run before closing a modal
-	callbackAfterClose: function () {} // Functions to run after closing a modal
+	callbackOpen: function ( toggle, modalID ) {}, // Functions to run after opening a modal
+	callbackClose: function () {} // Functions to run after closing a modal
 });
 ```
 
