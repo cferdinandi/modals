@@ -1,5 +1,5 @@
 /**
- * Modals v6.0.4
+ * Modals v7.0.0
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
@@ -8,7 +8,7 @@
  */
 
 /*  Hide modal window by default */
-/* line 2, ../components/_modals.scss */
+/* line 2, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal {
   display: none;
   visibility: hidden;
@@ -17,12 +17,11 @@
   border: 0.0725em solid #e5e5e5;
   padding: 0.5em 1em;
   border-radius: 0.0725em;
-  -webkit-box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
 }
 
 /*  When active, show modal window */
-/* line 14, ../components/_modals.scss */
+/* line 14, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal.active {
   display: block;
   visibility: visible;
@@ -35,8 +34,9 @@
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
+
 @media (min-width: 30em) {
-  /* line 14, ../components/_modals.scss */
+  /* line 14, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal.active {
     top: 50px;
     left: 3%;
@@ -49,26 +49,25 @@
 
 /*  Modal styling for bigger screens */
 @media (min-width: 40em) {
-  /* line 38, ../components/_modals.scss */
+  /* line 38, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal.active {
     left: 8%;
     right: 8%;
   }
-
   /* Set max-width on medium sized modals */
-  /* line 44, ../components/_modals.scss */
+  /* line 44, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal-medium.active {
     max-width: 35em;
   }
-
   /* Set max-width on small sized modals */
-  /* line 49, ../components/_modals.scss */
+  /* line 49, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal-small.active {
     max-width: 25em;
   }
 }
+
 /*  Styling for modal window background */
-/* line 55, ../components/_modals.scss */
+/* line 55, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal-bg {
   position: fixed;
   top: 0;
@@ -82,7 +81,7 @@
 }
 
 /*  Styling for close button */
-/* line 68, ../components/_modals.scss */
+/* line 68, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .close {
   float: right;
   color: #808080;
@@ -92,7 +91,7 @@
 }
 
 /*  Styling for close button on hover */
-/* line 77, ../components/_modals.scss */
+/* line 77, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .close:hover {
   color: #5a5a5a;
   text-decoration: none;

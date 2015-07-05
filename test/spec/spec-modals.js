@@ -94,8 +94,7 @@ describe('Modals', function () {
 			injectElem();
 			modals.init({
 				modalActiveClass: 'modal-active',
-				callbackBeforeOpen: function () { document.documentElement.classList.add('callback-before'); },
-				callbackAfterOpen: function () { document.documentElement.classList.add('callback-after'); }
+				callbackOpen: function () { document.documentElement.classList.add('callback'); }
 			});
 			toggle = document.querySelector('[data-modal]');
 			content = document.querySelector( toggle.getAttribute('data-modal') );
@@ -105,8 +104,7 @@ describe('Modals', function () {
 		it('User options should be merged into defaults', function () {
 			trigger('click', toggle);
 			expect(content.classList.contains('modal-active')).toBe(true);
-			expect(doc.classList.contains('callback-before')).toBe(true);
-			expect(doc.classList.contains('callback-after')).toBe(true);
+			expect(doc.classList.contains('callback')).toBe(true);
 		});
 
 	});
