@@ -35,13 +35,14 @@
 
 	/**
 	 * A simple forEach() implementation for Arrays, Objects and NodeLists.
+	 * @private
 	 * @author Todd Motto
 	 * @link   https://github.com/toddmotto/foreach
 	 * @param {Array|Object|NodeList} collection Collection of items to iterate
 	 * @param {Function}              callback   Callback function for each iteration
 	 * @param {Array|Object|NodeList} scope      Object/NodeList/Array that forEach is iterating over (aka `this`)
 	 */
-	forEach = function ( collection, callback, scope ) {
+	var forEach = function ( collection, callback, scope ) {
 		if ( Object.prototype.toString.call( collection ) === '[object Object]' ) {
 			for ( var prop in collection ) {
 				if ( Object.prototype.hasOwnProperty.call( collection, prop ) ) {
