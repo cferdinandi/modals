@@ -1,5 +1,5 @@
 /**
- * Modals v8.0.0
+ * Modals v8.0.1
  * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
  * http://github.com/cferdinandi/modals
  * 
@@ -7,93 +7,104 @@
  * http://gomakethings.com/mit/
  */
 
-/*  Hide modal window by default */
-/* line 2, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/**
+ * Hide modal window by default
+ */
+/* line 4, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal {
-  display: none;
-  visibility: hidden;
-  z-index: 9999;
   background-color: #ffffff;
   border: 0.0725em solid #e5e5e5;
-  padding: 0.5em 1em;
   border-radius: 0.0725em;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.3);
+  display: none;
+  max-width: 100%;
+  padding: 0.5em 1em;
+  visibility: hidden;
+  z-index: 9999;
 }
 
-/*  When active, show modal window */
-/* line 14, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+@media (min-width: 40em) {
+  /* line 4, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  .modal {
+    max-width: 98%;
+  }
+}
+
+/**
+ * Show active modal
+ */
+/* line 23, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal.active {
   display: block;
-  visibility: visible;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   height: 100%;
+  left: 0;
   max-height: 100%;
   overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  visibility: visible;
   -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 30em) {
-  /* line 14, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  /* line 23, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal.active {
-    top: 50px;
-    left: 3%;
-    right: 3%;
     height: auto;
+    left: 3%;
     margin-left: auto;
     margin-right: auto;
+    right: 3%;
+    top: 50px;
   }
 }
 
-/*  Modal styling for bigger screens */
 @media (min-width: 40em) {
-  /* line 38, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  /* line 23, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal.active {
     left: 8%;
     right: 8%;
   }
-  /* Set max-width on medium sized modals */
-  /* line 44, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
-  .modal-medium.active {
-    max-width: 35em;
+  /* line 48, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  .modal.active.modal-medium {
+    width: 35em;
   }
-  /* Set max-width on small sized modals */
-  /* line 49, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
-  .modal-small.active {
-    max-width: 25em;
+  /* line 52, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  .modal.active.modal-small {
+    width: 25em;
   }
 }
 
-/*  Styling for modal window background */
-/* line 55, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/**
+ * Modal background
+ */
+/* line 61, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal-bg {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 9998;
   background-color: #272727;
+  bottom: 0;
+  position: fixed;
+  left: 0;
   opacity: .9;
-  filter: alpha(opacity=90);
+  right: 0;
+  top: 0;
+  z-index: 9998;
 }
 
-/*  Styling for close button */
-/* line 68, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/**
+ * Close button
+ */
+/* line 75, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .close {
-  float: right;
   color: #808080;
+  cursor: pointer;
+  float: right;
   font-weight: bold;
   font-size: 1.5em;
-  cursor: pointer;
 }
 
-/*  Styling for close button on hover */
-/* line 77, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 82, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .close:hover {
   color: #5a5a5a;
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: none;
 }
