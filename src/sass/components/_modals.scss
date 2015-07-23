@@ -1,81 +1,87 @@
-/*  Hide modal window by default */
+/**
+ * Hide modal window by default
+ */
 .modal {
-	display: none;
-	visibility: hidden;
-	z-index: 9999;
 	background-color: $color-white;
 	border: calc-em(1px) solid $color-gray-light;
-	padding: calc-em(8px) calc-em(16px);
 	border-radius: calc-em(1px);
 	box-shadow: 0 calc-em(4px) calc-em(8px) rgba(0, 0, 0, 0.3);
+	display: none;
+	max-width: 100%;
+	padding: calc-em(8px) calc-em(16px);
+	visibility: hidden;
+	z-index: 9999;
+
+	@media (min-width: $bp-medium) {
+		max-width: 98%;
+	}
 }
 
-/*  When active, show modal window */
+/**
+ * Show active modal
+ */
 .modal.active {
 	display: block;
-	visibility: visible;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
 	height: 100%;
+	left: 0;
 	max-height: 100%;
 	overflow: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+	visibility: visible;
 	-webkit-overflow-scrolling: touch;
 
 	@media (min-width: $bp-small) {
-		top: 50px;
-		left: 3%;
-		right: 3%;
 		height: auto;
+		left: 3%;
 		margin-left: auto;
 		margin-right: auto;
+		right: 3%;
+		top: 50px;
 	}
-}
 
-/*  Modal styling for bigger screens */
-@media (min-width: $bp-medium) {
-	.modal.active {
+	@media (min-width: $bp-medium) {
 		left: 8%;
 		right: 8%;
-	}
 
-	/* Set max-width on medium sized modals */
-	.modal-medium.active {
-		max-width: 35em;
-	}
+		&.modal-medium {
+			width: 35em;
+		}
 
-	/* Set max-width on small sized modals */
-	.modal-small.active {
-		max-width: 25em;
+		&.modal-small {
+			width: 25em;
+		}
 	}
 }
 
-/*  Styling for modal window background */
+/**
+ * Modal background
+ */
 .modal-bg {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 9998;
 	background-color: $color-black;
+	bottom: 0;
+	position: fixed;
+	left: 0;
 	opacity: .9;
-	filter: alpha(opacity=90);
+	right: 0;
+	top: 0;
+	z-index: 9998;
 }
 
-/*  Styling for close button */
+/**
+ * Close button
+ */
 .close {
-	float: right;
 	color: $color-gray-dark;
+	cursor: pointer;
+	float: right;
 	font-weight: bold;
 	font-size: calc-em(24px);
-	cursor: pointer;
-}
 
-/*  Styling for close button on hover */
-.close:hover {
-	color: darken( $color-gray-dark, 15% );
-	text-decoration: none;
-	cursor: pointer;
+	&:hover {
+		color: darken( $color-gray-dark, 15% );
+		cursor: pointer;
+		text-decoration: none;
+	}
 }
