@@ -1,10 +1,8 @@
-/**
- * Modals v8.0.1
- * Simple modal dialogue pop-up windows, by Chris Ferdinandi.
+/*!
+ * Modals v8.1.0: Simple modal dialogue pop-up windows
+ * (c) 2015 Chris Ferdinandi
+ * MIT License
  * http://github.com/cferdinandi/modals
- * 
- * Free to use under the MIT License.
- * http://gomakethings.com/mit/
  */
 
 (function (root, factory) {
@@ -24,12 +22,15 @@
 	//
 
 	var publicApi = {}; // Object for public APIs
-	var supports = !!document.querySelector && !!root.addEventListener; // Feature test
+	var supports = 'querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'); // Feature test
 	var state = 'closed';
 	var settings;
 
 	// Default settings
 	var defaults = {
+		selectorToggle: '[data-modal]',
+		selectorWindow: '[data-modal-window]',
+		selectorClose: '[data-modal-close]',
 		modalActiveClass: 'active',
 		modalBGClass: 'modal-bg',
 		backspaceClose: true,
@@ -121,7 +122,6 @@
 
 		// Variables
 		var firstChar = selector.charAt(0);
-		var supports = 'classList' in document.documentElement;
 		var attribute, value;
 
 		// If selector is a data attribute, split attribute from value
@@ -140,14 +140,8 @@
 
 			// If selector is a class
 			if ( firstChar === '.' ) {
-				if ( supports ) {
-					if ( elem.classList.contains( selector.substr(1) ) ) {
-						return elem;
-					}
-				} else {
-					if ( new RegExp('(^|\\s)' + selector.substr(1) + '(\\s|$)').test( elem.className ) ) {
-						return elem;
-					}
+				if ( elem.classList.contains( selector.substr(1) ) ) {
+					return elem;
 				}
 			}
 
@@ -240,8 +234,8 @@
 
 		// Selectors and variables
 		var settings = extend( defaults, options || {} ); // Merge user options with defaults
-		var openModals = document.querySelectorAll('[data-modal-window].' + settings.modalActiveClass);
-		var modalsBg = document.querySelectorAll('[data-modal-bg]'); // Get modal background element
+		var openModals = document.querySelectorAll( settings.selectorWindow + '.' + settings.modalActiveClass ); // Get open modals
+		var modalsBg = document.querySelectorAll( '[data-modal-bg]' ); // Get modal background element
 
 		if ( openModals.length > 0 || modalsBg.length > 0 ) {
 
@@ -273,9 +267,9 @@
 	 */
 	var eventHandler = function (event) {
 		var toggle = event.target;
-		var open = getClosest(toggle, '[data-modal]');
-		var close = getClosest(toggle, '[data-modal-close]');
-		var modal = getClosest(toggle, '[data-modal-window]');
+		var open = getClosest(toggle, settings.selectorToggle);
+		var close = getClosest(toggle, settings.selectorClose);
+		var modal = getClosest(toggle, settings.selectorWindow);
 		var key = event.keyCode;
 
 		if ( key && state === 'open' ) {
