@@ -3,16 +3,6 @@ Simple modal dialogue windows.
 
 [Download Modals](https://github.com/cferdinandi/modals/archive/master.zip) / [View the demo](http://cferdinandi.github.io/modals/)
 
-**In This Documentation**
-
-1. [Getting Started](#getting-started)
-2. [Installing with Package Manager](#installing-with-package-managers)
-3. [Working with the Source Files](#working-with-the-source-files)
-4. [Options & Settings](#options-and-settings)
-5. [Browser Compatibility](#browser-compatibility)
-6. [How to Contribute](#how-to-contribute)
-7. [License](#license)
-
 
 
 ## Getting Started
@@ -23,13 +13,12 @@ Compiled and production-ready code can be found in the `dist` directory. The `sr
 
 ```html
 <link rel="stylesheet" href="dist/css/modals.css">
-<script src="dist/js/classList.js"></script>
 <script src="dist/js/modals.js"></script>
 ```
 
-Modals requires [classList.js](https://github.com/eligrey/classList.js), a polyfill that extends ECMAScript 5 API support to more browsers.
-
 ### 2. Add the markup to your HTML.
+
+Add the `[data-modal]` attribute to your modal toggle. Add the `.modal` class and the `[data-modal-window]` to your modal window. Be sure to assign each modal a unique ID.
 
 ```html
 <a data-modal="#modal" href="#">Modal Toggle</a>
@@ -42,7 +31,7 @@ Modals requires [classList.js](https://github.com/eligrey/classList.js), a polyf
 </div>
 ```
 
-Be sure to assign each modal a unique ID. Add the `.modal-medium` or `.modal-small` class to change the modal size.
+Add the `.modal-medium` or `.modal-small` class to change the modal size.
 
 ```html
 <div class="modal modal-small" data-modal-window id="modal">
@@ -56,7 +45,7 @@ Adding a `[data-modal-close]` data attribute to any button or link turns it into
 
 Always specify a functioning link as a backup for modals.
 
-Modals uses modern JavaScript API's that aren't supported by older browsers, including IE 8 and lower. On modern browsers, Modals will prevent the backup URL from redirecting people away from the current page.
+Modals uses modern JavaScript API's that aren't supported by older browsers, including IE 10 and lower. On modern browsers, Modals will prevent the backup URL from redirecting people away from the current page.
 
 ```html
 <a data-modal="#modal" href="http://backup-url.com">Modal Toggle</a>
@@ -66,13 +55,13 @@ Modals uses modern JavaScript API's that aren't supported by older browsers, inc
 
 ### 4. Initialize Modals.
 
+In the footer of your page, after the content, initialize Modals. And that's it, you're done. Nice work!
+
 ```html
 <script>
 	modals.init();
 </script>
 ```
-
-In the footer of your page, after the content, initialize Modals. And that's it, you're done. Nice work!
 
 
 
@@ -103,6 +92,7 @@ Make sure these are installed first.
 3. When it's done installing, run one of the task runners to get going:
 	* `gulp` manually compiles files.
 	* `gulp watch` automatically compiles files and applies changes using [LiveReload](http://livereload.com/).
+	* `gulp test` compiles files and runs unit tests.
 
 
 
@@ -116,6 +106,9 @@ You can pass options and callbacks into Modals through the `init()` function:
 
 ```javascript
 modals.init({
+	selectorToggle: '[data-modal]', // Modal toggle selector
+	selectorWindow: '[data-modal-window]', // Modal window selector
+	selectorClose: '[data-modal-close]', // Modal window close selector
 	modalActiveClass: 'active', // Class applied to active modal windows
 	modalBGClass: 'modal-bg', // Class applied to the modal background overlay
 	backspaceClose: true, // Boolean, whether or not to enable backspace/delete button modal closing
@@ -123,6 +116,8 @@ modals.init({
 	callbackClose: function () {} // Functions to run after closing a modal
 });
 ```
+
+***Note:*** *If you change the `selectorToggle`, you still need to include the `[data-modal]` attribute in order to pass in the selector for the navigation menu.*
 
 *If your modal includes any form fields, you should set `backspaceClose` to `false` or users will not be able to delete their text.*
 
@@ -175,7 +170,7 @@ modals.destroy();
 
 ## Brower Compatibility
 
-Modals works in all modern browsers, and IE 9 and above.
+Modals works in all modern browsers, and IE 10 and above. You can extend browser support back to IE 9 with the [classList.js polyfill](https://github.com/eligrey/classList.js/).
 
 Modals is built with modern JavaScript APIs, and uses progressive enhancement. If the JavaScript file fails to load, or if your site is viewed on older and less capable browsers, all content will be displayed by default.
 
