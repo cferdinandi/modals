@@ -26,7 +26,9 @@
 		selectorClose: '[data-modal-close]',
 		modalActiveClass: 'active',
 		modalBGClass: 'modal-bg',
+		modalActiveBodyClass: 'modal-active',
 		backspaceClose: true,
+		escapeClose: true,
 		callbackOpen: function () {},
 		callbackClose: function () {}
 	};
@@ -211,6 +213,11 @@
 		// Activate the modal
 		modal.classList.add( settings.modalActiveClass );
 		document.body.appendChild(modalBg);
+		
+		// Add active modal body class
+    		document.body.classList.add( settings.modalActiveBodyClass );
+		
+		// Set state to open
 		state = 'open';
 
 		settings.callbackOpen( toggle, modalID ); // Run callbacks after opening a modal
@@ -244,6 +251,11 @@
 			forEach(modalsBg, function (bg) {
 				document.body.removeChild(bg);
 			});
+			
+			// Remove active modal body class
+			if ( document.body.classList.contains( settings.modalActiveBodyClass ) ) {
+				document.body.classList.remove( settings.modalActiveBodyClass );      
+			}
 
 			// Set state to closed
 			state = 'closed';
@@ -266,7 +278,7 @@
 		var key = event.keyCode;
 
 		if ( key && state === 'open' ) {
-			if ( key === 27 || ( settings.backspaceClose && ( key === 8 || key === 46 ) ) ) {
+			if ( ( settings.escapeClose && key === 27 ) || ( settings.backspaceClose && ( key === 8 || key === 46 ) ) ) {
 				publicApi.closeModals(null, settings);
 			}
 		} else if ( toggle ) {
