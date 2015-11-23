@@ -17,7 +17,7 @@
 	var publicApi = {}; // Object for public APIs
 	var supports = 'querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'); // Feature test
 	var state = 'closed';
-	var settings;
+	var scrollbarWidth, settings;
 
 	// Default settings
 	var defaults = {
@@ -26,6 +26,9 @@
 		selectorClose: '[data-modal-close]',
 		modalActiveClass: 'active',
 		modalBGClass: 'modal-bg',
+		preventBGScroll: false,
+		preventBGScrollHtml: true,
+		preventBGScrollBody: true,
 		backspaceClose: true,
 		callbackOpen: function () {},
 		callbackClose: function () {}
@@ -189,6 +192,32 @@
 		}
 	};
 
+	var getScrollbarWidth = function () {
+
+		// Setup div
+		var outer = document.createElement('div');
+		outer.style.visibility = 'hidden';
+		outer.style.width = '100px';
+		outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+		document.body.appendChild(outer);
+
+		// Force scrollbars
+		var widthNoScroll = outer.offsetWidth;
+		outer.style.overflow = 'scroll';
+
+		// Add innerdiv
+		var inner = document.createElement('div');
+		inner.style.width = '100%';
+		outer.appendChild(inner);
+		var widthWithScroll = inner.offsetWidth;
+
+		// Remove divs
+		outer.parentNode.removeChild(outer);
+
+		return widthNoScroll - widthWithScroll;
+
+	};
+
 	/**
 	 * Open the target modal window
 	 * @public
@@ -212,6 +241,17 @@
 		modal.classList.add( settings.modalActiveClass );
 		document.body.appendChild(modalBg);
 		state = 'open';
+
+		// Prevent background scrolling
+		if ( settings.preventBGScroll ) {
+			if ( settings.preventBGScrollHtml ) {
+				document.documentElement.style.overflowY = 'hidden';
+			}
+			if ( settings.preventBGScrollBody ) {
+				document.body.style.overflowY = 'hidden';
+			}
+			document.body.style.paddingRight = scrollbarWidth + 'px';
+		}
 
 		settings.callbackOpen( toggle, modalID ); // Run callbacks after opening a modal
 
@@ -247,6 +287,13 @@
 
 			// Set state to closed
 			state = 'closed';
+
+			// Reallow background scrolling
+			if ( settings.preventBGScroll ) {
+				document.documentElement.style.overflowY = '';
+				document.body.style.overflowY = '';
+				document.body.style.paddingRight = '';
+			}
 
 			settings.callbackClose(); // Run callbacks after closing a modal
 
@@ -291,6 +338,10 @@
 		document.removeEventListener('click', eventHandler, false);
 		document.removeEventListener('touchstart', eventHandler, false);
 		document.removeEventListener('keydown', eventHandler, false);
+		document.documentElement.style.overflowY = '';
+		document.body.style.overflowY = '';
+		document.body.style.paddingRight = '';
+		scrollbarWidth = null;
 		settings = null;
 	};
 
@@ -309,6 +360,9 @@
 
 		// Merge user options with defaults
 		settings = extend( defaults, options || {} );
+
+		// Get scrollbar width
+		scrollbarWidth = getScrollbarWidth();
 
 		// Listen for events
 		document.addEventListener('click', eventHandler, false);
