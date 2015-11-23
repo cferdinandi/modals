@@ -1,6 +1,6 @@
 {
 	"name": "Modals",
-	"version": "8.1.0",
+	"version": "8.2.0",
 	"description": "Simple modal dialogue pop-up windows",
 	"main": "./dist",
 	"author": {
