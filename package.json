@@ -1,6 +1,6 @@
 {
 	"name": "Modals",
-	"version": "8.2.0",
+	"version": "8.3.0",
 	"description": "Simple modal dialogue pop-up windows",
 	"main": "./dist/js/modals.min.js",
 	"author": {

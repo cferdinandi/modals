@@ -1,6 +1,6 @@
 /*!
  * Modals v8.2.0: Simple modal dialogue pop-up windows
- * (c) 2015 Chris Ferdinandi
+ * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/modals
  */
@@ -37,6 +37,7 @@
 		preventBGScrollHtml: true,
 		preventBGScrollBody: true,
 		backspaceClose: true,
+		stopVideo: true,
 		callbackOpen: function () {},
 		callbackClose: function () {}
 	};
@@ -185,18 +186,27 @@
 	 * @param  {Element} content The content container the video is in
 	 * @param  {String} activeClass The class asigned to expanded content areas
 	 */
-	var stopVideos = function ( content, activeClass ) {
-		if ( !content.classList.contains( activeClass ) ) {
-			var iframe = content.querySelector( 'iframe');
-			var video = content.querySelector( 'video' );
-			if ( iframe ) {
-				var iframeSrc = iframe.src;
-				iframe.src = iframeSrc;
-			}
-			if ( video ) {
-				video.pause();
-			}
+	var stopVideos = function ( content, settings ) {
+
+		// Check if stop video enabled
+		if ( !settings.stopVideo ) return;
+
+		// Only run if content container was open
+		if ( !content.classList.contains( settings.modalActiveClass ) ) return;
+
+		// Check if the video is an iframe or HTML5 video
+		var iframe = content.querySelector( 'iframe');
+		var video = content.querySelector( 'video' );
+
+		// Stop the video
+		if ( iframe ) {
+			var iframeSrc = iframe.src;
+			iframe.src = iframeSrc;
 		}
+		if ( video ) {
+			video.pause();
+		}
+
 	};
 
 	var getScrollbarWidth = function () {
@@ -282,7 +292,7 @@
 			// Close all modals
 			forEach(openModals, function (modal) {
 				if ( modal.classList.contains( settings.modalActiveClass ) ) {
-					stopVideos(modal); // If active, stop video from playing
+					stopVideos( modal, settings ); // If active, stop video from playing
 					modal.classList.remove( settings.modalActiveClass );
 				}
 			});
