@@ -1,5 +1,5 @@
 /*!
- * Modals v8.2.0: Simple modal dialogue pop-up windows
+ * Modals v8.3.0: Simple modal dialogue pop-up windows
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/modals
