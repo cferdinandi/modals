@@ -115,6 +115,7 @@ modals.init({
 	preventBGScrollHtml: true, // Boolean, adds overflow-y: hidden to <html> if true (preventBGScroll must also be true)
 	preventBGScrollBody: true, // Boolean, adds overflow-y: hidden to <body> if true (preventBGScroll must also be true)
 	backspaceClose: true, // Boolean, whether or not to enable backspace/delete button modal closing
+	stopVideo: true, // Boolean, if true, stop videos when tab closes
 	callbackOpen: function ( toggle, modalID ) {}, // Functions to run after opening a modal
 	callbackClose: function () {} // Functions to run after closing a modal
 });
@@ -181,7 +182,7 @@ Modals is built with modern JavaScript APIs, and uses progressive enhancement. I
 
 ## How to Contribute
 
-In lieu of a formal style guide, take care to maintain the existing coding style. Please apply fixes to both the development and production code. Don't forget to update the version number, and when applicable, the documentation.
+Please review the [contributing guidelines](CONTRIBUTING.md).
 
 
 
