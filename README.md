@@ -24,7 +24,7 @@ Add the `[data-modal]` attribute to your modal toggle. Add the `.modal` class an
 <a data-modal="#modal" href="#">Modal Toggle</a>
 
 <div class="modal" data-modal-window id="modal">
-	<a class="close" data-modal-close>x</a>
+	<a class="close" data-modal-close href="#">x</a>
 	<h3>Modal</h3>
 	<p>Modal content</p>
 	<button data-modal-close>Close</button>
@@ -116,8 +116,8 @@ modals.init({
 	preventBGScrollBody: true, // Boolean, adds overflow-y: hidden to <body> if true (preventBGScroll must also be true)
 	backspaceClose: true, // Boolean, whether or not to enable backspace/delete button modal closing
 	stopVideo: true, // Boolean, if true, stop videos when tab closes
-	callbackOpen: function ( toggle, modalID ) {}, // Functions to run after opening a modal
-	callbackClose: function () {} // Functions to run after closing a modal
+	callbackOpen: function ( toggle, modal ) {}, // Functions to run after opening a modal
+	callbackClose: function ( toggle, modal ) {} // Functions to run after closing a modal
 });
 ```
 
@@ -147,12 +147,11 @@ modals.openModal(
 modals.openModal( null, '#modal' );
 ```
 
-#### closeModals()
-Close all modal windows.
+#### closeModal()
+Close the open modal window.
 
 ```javascript
-modals.closeModals(
-	toggle, // The node that triggered the close action
+modals.closeModal(
 	options // Classes and callbacks. Same options as those passed into the init() function.
 );
 ```
@@ -160,7 +159,7 @@ modals.closeModals(
 **Example**
 
 ```javascript
-modals.closeModals();
+modals.closeModal();
 ```
 
 #### destroy()

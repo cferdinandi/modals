@@ -252,6 +252,10 @@
 		document.body.appendChild(modalBg);
 		state = 'open';
 
+		// Bring modal into focus
+		modal.setAttribute( 'tabindex', '-1' );
+		modal.focus();
+
 		// Prevent background scrolling
 		if ( settings.preventBGScroll ) {
 			if ( settings.preventBGScrollHtml ) {
@@ -263,51 +267,52 @@
 			document.body.style.paddingRight = scrollbarWidth + 'px';
 		}
 
-		settings.callbackOpen( toggle, modalID ); // Run callbacks after opening a modal
+		settings.callbackOpen( toggle, modal ); // Run callbacks after opening a modal
 
 	};
 
 	/**
-	 * Close all modal windows
+	 * Close open modal window
 	 * @public
 	 * @param  {Object} options
 	 * @param  {Event} event
 	 */
-	publicApi.closeModals = function (toggle, options) {
+	publicApi.closeModal = function (options) {
 
 		// Selectors and variables
-		var settings = extend( defaults, options || {} ); // Merge user options with defaults
-		var openModals = document.querySelectorAll( settings.selectorWindow + '.' + settings.modalActiveClass ); // Get open modals
-		var modalsBg = document.querySelectorAll( '[data-modal-bg]' ); // Get modal background element
+		var localSettings = extend( settings || defaults, options || {} ); // Merge user options with defaults
+		var modal = document.querySelector( localSettings.selectorWindow + '.' + localSettings.modalActiveClass ); // Get open modal
+		var modalBg = document.querySelector( '[data-modal-bg]' ); // Get modal background element
 
-		if ( openModals.length > 0 || modalsBg.length > 0 ) {
+		// Sanity check
+		if ( !modal || !modalBg ) return;
 
-			// Close all modals
-			forEach(openModals, function (modal) {
-				if ( modal.classList.contains( settings.modalActiveClass ) ) {
-					stopVideos( modal, settings ); // If active, stop video from playing
-					modal.classList.remove( settings.modalActiveClass );
-				}
-			});
+		// Stop videos from playing
+		stopVideos( modal, localSettings );
 
-			// Remove all modal backgrounds
-			forEach(modalsBg, function (bg) {
-				document.body.removeChild(bg);
-			});
+		// Close the modal
+		modal.classList.remove( localSettings.modalActiveClass );
 
-			// Set state to closed
-			state = 'closed';
+		// Remove the modal background from the DOM
+		document.body.removeChild(modalBg);
 
-			// Reallow background scrolling
-			if ( settings.preventBGScroll ) {
-				document.documentElement.style.overflowY = '';
-				document.body.style.overflowY = '';
-				document.body.style.paddingRight = '';
-			}
+		// Set state to closed
+		state = 'closed';
 
-			settings.callbackClose(); // Run callbacks after closing a modal
-
+		// Reallow background scrolling
+		if ( localSettings.preventBGScroll ) {
+			document.documentElement.style.overflowY = '';
+			document.body.style.overflowY = '';
+			document.body.style.paddingRight = '';
 		}
+
+		// Bring focus back to the button that toggles the modal
+		var toggle = document.querySelector( '[data-modal="#' + modal.id + '"]' );
+		if ( toggle ) {
+			toggle.focus();
+		}
+
+		localSettings.callbackClose( modal ); // Run callbacks after closing a modal
 
 	};
 
@@ -324,17 +329,17 @@
 
 		if ( key && state === 'open' ) {
 			if ( key === 27 || ( settings.backspaceClose && ( key === 8 || key === 46 ) ) ) {
-				publicApi.closeModals(null, settings);
+				publicApi.closeModal();
 			}
 		} else if ( toggle ) {
 			if ( modal && !close ) {
 				return;
-			} else if ( open ) {
+			} else if ( open && ( !key || key === 13 ) ) {
 				event.preventDefault();
 				publicApi.openModal( open, open.getAttribute('data-modal'), settings );
 			} else if ( state === 'open' ) {
 				event.preventDefault();
-				publicApi.closeModals(toggle, settings);
+				publicApi.closeModal();
 			}
 		}
 	};
