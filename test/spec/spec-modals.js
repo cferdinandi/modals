@@ -236,14 +236,14 @@ describe('Modals', function () {
 		it('Modal should not have ".active" class on click', function () {
 			trigger('click', toggle);
 			expect(content.classList.contains('active')).toBe(true);
-			modals.closeModals();
+			modals.closeModal();
 			expect(content.classList.contains('active')).toBe(false);
 		});
 
 		it('Modal background should not exist', function () {
 			trigger('click', toggle);
 			expect(document.querySelector('.modal-bg').length).not.toBe(0);
-			modals.closeModals();
+			modals.closeModal();
 			expect(document.querySelector('.modal-bg')).toBe(null);
 		});
 
