@@ -17,7 +17,7 @@
 	var publicApi = {}; // Object for public APIs
 	var supports = 'querySelector' in document && 'addEventListener' in root && 'classList' in document.createElement('_'); // Feature test
 	var state = 'closed';
-	var scrollbarWidth, settings;
+	var scrollbarWidth, placeholder, settings;
 
 	// Default settings
 	var defaults = {
@@ -242,6 +242,11 @@
 		var settings = extend( settings || defaults, options || {} );  // Merge user options with defaults
 		var modal = document.querySelector(modalID);
 
+		// Save the visitor's spot on the page
+		if ( toggle ) {
+			placeholder = toggle;
+		}
+
 		// Define the modal background
 		var modalBg = document.createElement('div');
 		modalBg.setAttribute('data-modal-bg', null);
@@ -306,13 +311,14 @@
 			document.body.style.paddingRight = '';
 		}
 
-		// Bring focus back to the button that toggles the modal
-		var toggle = document.querySelector( '[data-modal="#' + modal.id + '"]' );
-		if ( toggle ) {
-			toggle.focus();
-		}
+		// Run callbacks after closing a modal
+		localSettings.callbackClose( placeholder, modal );
 
-		localSettings.callbackClose( modal ); // Run callbacks after closing a modal
+		// Bring focus back to the button that toggles the modal
+		if ( placeholder ) {
+			placeholder.focus();
+			placeholder = null;
+		}
 
 	};
 
@@ -357,6 +363,7 @@
 		document.body.style.overflowY = '';
 		document.body.style.paddingRight = '';
 		scrollbarWidth = null;
+		placeholder = null;
 		settings = null;
 	};
 
