@@ -1,5 +1,5 @@
 /*!
- * Modals v8.3.0: Simple modal dialogue pop-up windows
+ * Modals v9.0.0: Simple modal dialogue pop-up windows
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/modals
@@ -73,10 +73,15 @@
   }
 }
 
+/* line 58, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+.modal:focus {
+  outline: none;
+}
+
 /**
  * Modal background
  */
-/* line 61, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 65, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal-bg {
   background-color: #272727;
   bottom: 0;
@@ -91,7 +96,7 @@
 /**
  * Close button
  */
-/* line 75, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 79, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .close {
   color: #808080;
   cursor: pointer;
@@ -100,7 +105,7 @@
   font-size: 1.5em;
 }
 
-/* line 82, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 86, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .close:hover {
   color: #5a5a5a;
   cursor: pointer;
