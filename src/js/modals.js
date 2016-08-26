@@ -202,6 +202,10 @@
 
 	};
 
+	/**
+	 * Get the width of the scroll bars
+	 * @private
+	 */
 	var getScrollbarWidth = function () {
 
 		// Setup div
@@ -229,6 +233,35 @@
 	};
 
 	/**
+	 * Create the modal background and append it to the DOM
+	 * @private
+	 */
+	var createModalBg = function () {
+
+		// If modal BG already exists, don't create another one
+		if ( document.querySelector('[data-modal-bg]') ) return;
+
+		// Define the modal background
+		var modalBg = document.createElement('div');
+		modalBg.setAttribute('data-modal-bg', true);
+		modalBg.classList.add( settings.modalBGClass );
+
+		// Append the modal background to the page
+		document.body.appendChild(modalBg);
+
+	};
+
+	/**
+	 * Remove the modal background from the DOM
+	 * @private
+	 */
+	var removeModalBg = function () {
+		var modalBg = document.querySelector( '[data-modal-bg]' );
+		if ( !modalBg ) return;
+		document.body.removeChild( modalBg );
+	};
+
+	/**
 	 * Open the target modal window
 	 * @public
 	 * @param  {Element} toggle The element that toggled the open modal event
@@ -247,14 +280,9 @@
 			placeholder = toggle;
 		}
 
-		// Define the modal background
-		var modalBg = document.createElement('div');
-		modalBg.setAttribute('data-modal-bg', true);
-		modalBg.classList.add( settings.modalBGClass );
-
 		// Activate the modal
 		modal.classList.add( settings.modalActiveClass );
-		document.body.appendChild(modalBg);
+		createModalBg();
 		state = 'open';
 
 		// Bring modal into focus
@@ -287,10 +315,9 @@
 		// Selectors and variables
 		var localSettings = extend( settings || defaults, options || {} ); // Merge user options with defaults
 		var modal = document.querySelector( localSettings.selectorWindow + '.' + localSettings.modalActiveClass ); // Get open modal
-		var modalBgs = document.querySelectorAll( '[data-modal-bg]' ); // Get modal background element
 
 		// Sanity check
-		if ( !modal || !modalBgs ) return;
+		if ( !modal ) return;
 
 		// Stop videos from playing
 		stopVideos( modal, localSettings );
@@ -299,9 +326,7 @@
 		modal.classList.remove( localSettings.modalActiveClass );
 
 		// Remove the modal background from the DOM
-		forEach(modalBgs, function (bg) {
-			document.body.removeChild(bg);
-		});
+		removeModalBg();
 
 		// Set state to closed
 		state = 'closed';

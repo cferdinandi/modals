@@ -1,6 +1,6 @@
 {
 	"name": "Modals",
-	"version": "9.1.1",
+	"version": "9.1.2",
 	"description": "Simple modal dialogue pop-up windows",
 	"main": "./dist/js/modals.min.js",
 	"author": {
