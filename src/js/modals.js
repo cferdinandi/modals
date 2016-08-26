@@ -249,7 +249,7 @@
 
 		// Define the modal background
 		var modalBg = document.createElement('div');
-		modalBg.setAttribute('data-modal-bg', null);
+		modalBg.setAttribute('data-modal-bg', true);
 		modalBg.classList.add( settings.modalBGClass );
 
 		// Activate the modal
@@ -287,10 +287,10 @@
 		// Selectors and variables
 		var localSettings = extend( settings || defaults, options || {} ); // Merge user options with defaults
 		var modal = document.querySelector( localSettings.selectorWindow + '.' + localSettings.modalActiveClass ); // Get open modal
-		var modalBg = document.querySelector( '[data-modal-bg]' ); // Get modal background element
+		var modalBgs = document.querySelectorAll( '[data-modal-bg]' ); // Get modal background element
 
 		// Sanity check
-		if ( !modal || !modalBg ) return;
+		if ( !modal || !modalBgs ) return;
 
 		// Stop videos from playing
 		stopVideos( modal, localSettings );
@@ -299,7 +299,9 @@
 		modal.classList.remove( localSettings.modalActiveClass );
 
 		// Remove the modal background from the DOM
-		document.body.removeChild(modalBg);
+		forEach(modalBgs, function (bg) {
+			document.body.removeChild(bg);
+		});
 
 		// Set state to closed
 		state = 'closed';
