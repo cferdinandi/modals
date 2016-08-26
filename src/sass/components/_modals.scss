@@ -55,6 +55,9 @@
 	}
 }
 
+/**
+ * Prevent outline when modal in focus
+ */
 .modal:focus {
 	outline: none;
 }
@@ -82,10 +85,10 @@
 	float: right;
 	font-weight: bold;
 	font-size: calc-em(24px);
+	text-decoration: none;
 
 	&:hover {
 		color: darken( $color-gray-dark, 15% );
 		cursor: pointer;
-		text-decoration: none;
 	}
 }
