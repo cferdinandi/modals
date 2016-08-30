@@ -1,12 +1,12 @@
 /*!
- * Modals v9.1.2: Simple modal dialogue pop-up windows
+ * Modals v9.1.3: Simple modal dialogue pop-up windows
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/modals
  */
 
 /**
- * Hide modal window by default
+ * Modal windows
  */
 /* line 4, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal {
@@ -28,10 +28,7 @@
   }
 }
 
-/**
- * Show active modal
- */
-/* line 23, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 19, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal.active {
   display: block;
   height: 100%;
@@ -46,7 +43,7 @@
 }
 
 @media (min-width: 30em) {
-  /* line 23, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  /* line 19, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal.active {
     height: auto;
     left: 3%;
@@ -58,25 +55,22 @@
 }
 
 @media (min-width: 40em) {
-  /* line 23, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  /* line 19, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal.active {
     left: 8%;
     right: 8%;
   }
-  /* line 48, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  /* line 44, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal.active.modal-medium {
     width: 35em;
   }
-  /* line 52, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+  /* line 48, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
   .modal.active.modal-small {
     width: 25em;
   }
 }
 
-/**
- * Prevent outline when modal in focus
- */
-/* line 61, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 54, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal:focus {
   outline: none;
 }
@@ -84,7 +78,7 @@
 /**
  * Modal background
  */
-/* line 68, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 63, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .modal-bg {
   background-color: #272727;
   bottom: 0;
@@ -99,7 +93,7 @@
 /**
  * Close button
  */
-/* line 82, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 78, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .close {
   color: #808080;
   cursor: pointer;
@@ -109,7 +103,7 @@
   text-decoration: none;
 }
 
-/* line 90, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
+/* line 86, /Users/cferdinandi/Sites/modals/src/sass/components/_modals.scss */
 .close:hover {
   color: #5a5a5a;
   cursor: pointer;

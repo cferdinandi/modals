@@ -1,5 +1,5 @@
 /**
- * Hide modal window by default
+ * Modal windows
  */
 .modal {
 	background-color: $color-white;
@@ -15,52 +15,47 @@
 	@media (min-width: $bp-medium) {
 		max-width: 98%;
 	}
-}
 
-/**
- * Show active modal
- */
-.modal.active {
-	display: block;
-	height: 100%;
-	left: 0;
-	max-height: 100%;
-	overflow: auto;
-	position: fixed;
-	right: 0;
-	top: 0;
-	visibility: visible;
-	-webkit-overflow-scrolling: touch;
+	&.active {
+		display: block;
+		height: 100%;
+		left: 0;
+		max-height: 100%;
+		overflow: auto;
+		position: fixed;
+		right: 0;
+		top: 0;
+		visibility: visible;
+		-webkit-overflow-scrolling: touch;
 
-	@media (min-width: $bp-small) {
-		height: auto;
-		left: 3%;
-		margin-left: auto;
-		margin-right: auto;
-		right: 3%;
-		top: 50px;
-	}
-
-	@media (min-width: $bp-medium) {
-		left: 8%;
-		right: 8%;
-
-		&.modal-medium {
-			width: 35em;
+		@media (min-width: $bp-small) {
+			height: auto;
+			left: 3%;
+			margin-left: auto;
+			margin-right: auto;
+			right: 3%;
+			top: 50px;
 		}
 
-		&.modal-small {
-			width: 25em;
+		@media (min-width: $bp-medium) {
+			left: 8%;
+			right: 8%;
+
+			&.modal-medium {
+				width: 35em;
+			}
+
+			&.modal-small {
+				width: 25em;
+			}
 		}
+	}
+
+	&:focus {
+		outline: none;
 	}
 }
 
-/**
- * Prevent outline when modal in focus
- */
-.modal:focus {
-	outline: none;
-}
 
 /**
  * Modal background
@@ -75,6 +70,7 @@
 	top: 0;
 	z-index: 9998;
 }
+
 
 /**
  * Close button
