@@ -1,5 +1,5 @@
 /*!
- * Modals v9.1.3: Simple modal dialogue pop-up windows
+ * Modals v9.2.0: Simple modal dialogue pop-up windows
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/modals
@@ -13,7 +13,7 @@
     } else {
         root.modals = factory(root);
     }
-})(typeof global !== 'undefined' ? global : this.window || this.global, function (root) {
+})(typeof global !== 'undefined' ? global : this.window || this.global, (function (root) {
 
     'use strict';
 
@@ -439,4 +439,4 @@
 
     return publicApi;
 
-});
+}));

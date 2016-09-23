@@ -17,21 +17,17 @@ var watch = require('gulp-watch');
 var livereload = require('gulp-livereload');
 var package = require('./package.json');
 
-// Scripts and tests
+// Scripts
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var karma = require('gulp-karma');
+var optimizejs = require('gulp-optimize-js');
 
 // Styles
 var sass = require('gulp-sass');
 var prefix = require('gulp-autoprefixer');
 var minify = require('gulp-cssnano');
-
-// SVGs
-var svgmin = require('gulp-svgmin');
-var svgstore = require('gulp-svgstore');
 
 // Docs
 var markdown = require('gulp-markdown');
@@ -53,20 +49,9 @@ var paths = {
 		input: 'src/sass/**/*.{scss,sass}',
 		output: 'dist/css/'
 	},
-	svgs: {
-		input: 'src/svg/*',
-		output: 'dist/svg/'
-	},
 	images: {
 		input: 'src/img/*',
 		output: 'dist/img/'
-	},
-	test: {
-		input: 'src/js/**/*.js',
-		karma: 'test/karma.conf.js',
-		spec: 'test/spec/**/*.js',
-		coverage: 'test/coverage/',
-		results: 'test/results/'
 	},
 	docs: {
 		input: 'src/docs/*.{html,md,markdown}',
@@ -100,16 +85,18 @@ var banner = {
 
 
 /**
- * Gulp Taks
+ * Gulp Tasks
  */
 
 // Lint, minify, and concatenate scripts
 gulp.task('build:scripts', ['clean:dist'], function() {
 	var jsTasks = lazypipe()
 		.pipe(header, banner.full, { package : package })
+		.pipe(optimizejs)
 		.pipe(gulp.dest, paths.scripts.output)
 		.pipe(rename, { suffix: '.min' })
 		.pipe(uglify)
+		.pipe(optimizejs)
 		.pipe(header, banner.min, { package : package })
 		.pipe(gulp.dest, paths.scripts.output);
 
@@ -152,27 +139,6 @@ gulp.task('build:styles', ['clean:dist'], function() {
 		.pipe(gulp.dest(paths.styles.output));
 });
 
-// Generate SVG sprites
-gulp.task('build:svgs', ['clean:dist'], function () {
-	return gulp.src(paths.svgs.input)
-		.pipe(plumber())
-		.pipe(tap(function (file, t) {
-			if ( file.isDirectory() ) {
-				var name = file.relative + '.svg';
-				return gulp.src(file.path + '/*.svg')
-					.pipe(svgmin())
-					.pipe(svgstore({
-						fileName: name,
-						prefix: 'icon-',
-						inlineSvg: true
-					}))
-					.pipe(gulp.dest(paths.svgs.output));
-			}
-		}))
-		.pipe(svgmin())
-		.pipe(gulp.dest(paths.svgs.output));
-});
-
 // Copy image files into output folder
 gulp.task('build:images', ['clean:dist'], function() {
 	return gulp.src(paths.images.input)
@@ -188,27 +154,11 @@ gulp.task('lint:scripts', function () {
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
-// Remove pre-existing content from output and test folders
+// Remove pre-existing content from output folder
 gulp.task('clean:dist', function () {
 	del.sync([
 		paths.output
 	]);
-});
-
-// Remove pre-existing content from text folders
-gulp.task('clean:test', function () {
-	del.sync([
-		paths.test.coverage,
-		paths.test.results
-	]);
-});
-
-// Run unit tests
-gulp.task('test:scripts', ['clean:test'], function() {
-	return gulp.src([paths.test.input].concat([paths.test.spec]))
-		.pipe(plumber())
-		.pipe(karma({ configFile: paths.test.karma }))
-		.on('error', function(err) { throw err; });
 });
 
 // Generate documentation
@@ -273,8 +223,7 @@ gulp.task('compile', [
 	'clean:dist',
 	'build:scripts',
 	'build:styles',
-	'build:images',
-	'build:svgs'
+	'build:images'
 ]);
 
 // Generate documentation
@@ -295,10 +244,4 @@ gulp.task('default', [
 gulp.task('watch', [
 	'listen',
 	'default'
-]);
-
-// Run unit tests
-gulp.task('test', [
-	'default',
-	'test:scripts'
 ]);
