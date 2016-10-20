@@ -26,7 +26,7 @@
         selectorClose: '[data-modal-close]',
         modalActiveClass: 'active',
         modalBGClass: 'modal-bg',
-        preventBGScroll: false,
+        preventBGScroll: true,
         preventBGScrollHtml: true,
         preventBGScrollBody: true,
         backspaceClose: true,

@@ -1,5 +1,5 @@
 /*!
- * Modals v9.2.0: Simple modal dialogue pop-up windows
+ * Modals v10.0.0: Simple modal dialogue pop-up windows
  * (c) 2016 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/modals
@@ -33,7 +33,7 @@
         selectorClose: '[data-modal-close]',
         modalActiveClass: 'active',
         modalBGClass: 'modal-bg',
-        preventBGScroll: false,
+        preventBGScroll: true,
         preventBGScrollHtml: true,
         preventBGScrollBody: true,
         backspaceClose: true,
