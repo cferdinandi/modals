@@ -1,6 +1,6 @@
 /*!
  * Modals v10.1.0: Simple modal dialogue pop-up windows
- * (c) 2016 Chris Ferdinandi
+ * (c) 2017 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/modals
  */
@@ -396,7 +396,6 @@
 
         // Listen for events
         document.addEventListener('click', eventHandler, false);
-        document.addEventListener('touchstart', eventHandler, false);
         document.addEventListener('keydown', eventHandler, false);
 
     };
