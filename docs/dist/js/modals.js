@@ -1,5 +1,5 @@
 /*!
- * Modals v10.1.1: Simple modal dialogue pop-up windows
+ * Modals v10.1.2: Simple modal dialogue pop-up windows
  * (c) 2017 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/modals
@@ -332,11 +332,18 @@
 
     /**
      * Run a callback after a click or tap, without running duplicate callbacks for the same event
-     * @private
      * @param  {Node}   elem       The element to listen for clicks and taps on
      * @param  {Function} callback The callback function to run on a click or tap
      */
-    var onClickOrTap = function (elem, callback) {
+    var onClickOrTap = function (elem, callback, destroy) {
+
+        // Remove event listeners
+        if ( destroy ) {
+            elem.removeEventListener('touchstart', onTouchStartEvent, false);
+            elem.removeEventListener('touchend', onTouchEndEvent, false);
+            elem.removeEventListener('click', onClickEvent, false);
+            return;
+        }
 
         // Make sure a callback is provided
         if ( !callback || typeof(callback) !== 'function' ) return;
@@ -371,7 +378,7 @@
             if ( Math.abs(distX) >= 7 || Math.abs(distY) >= 10 ) return;
 
             // Run callback
-            callback( event, isLongpress );
+            callback(event);
 
         };
 
@@ -387,7 +394,7 @@
             }
 
             // Run our callback
-            callback( event, false );
+            callback(event);
         };
 
         // Event listeners
@@ -431,8 +438,7 @@
      */
     publicApi.destroy = function () {
         if ( !settings ) return;
-        document.removeEventListener('click', eventHandler, false);
-        document.removeEventListener('touchstart', eventHandler, false);
+        onClickOrTap(document, null, true);
         document.removeEventListener('keydown', eventHandler, false);
         document.documentElement.style.overflowY = '';
         document.body.style.overflowY = '';
