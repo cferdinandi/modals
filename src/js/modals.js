@@ -389,7 +389,6 @@
 
         // Listen for events
         document.addEventListener('click', eventHandler, false);
-        document.addEventListener('touchstart', eventHandler, false);
         document.addEventListener('keydown', eventHandler, false);
 
     };
