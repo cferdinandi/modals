@@ -1,7 +1,5 @@
-# [DEPRECATED] Modals [![Build Status](https://travis-ci.org/cferdinandi/modals.svg)](https://travis-ci.org/cferdinandi/modals)
+# Modals [![Build Status](https://travis-ci.org/cferdinandi/modals.svg)](https://travis-ci.org/cferdinandi/modals)
 Simple modal dialogue windows.
-
-*__Deprecation Notice:__ This is now better handled with [browser-native dialog modals](https://keithjgrant.com/posts/2018/01/meet-the-new-dialog-element/).*
 
 [Download Modals](https://github.com/cferdinandi/modals/archive/master.zip) / [View the demo](http://cferdinandi.github.io/modals/)
 
