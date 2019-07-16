@@ -76,7 +76,7 @@ In the footer of your page, after the content, initialize Modals. And that's it,
 
 You can install Modals with your favorite package manager.
 
-* **NPM:** `npm install cferdinandi/modals`
+* **NPM:** `npm install modals.js`
 * **Bower:** `bower install https://github.com/cferdinandi/modals.git`
 * **Component:** `component install install cferdinandi/modals`
 
